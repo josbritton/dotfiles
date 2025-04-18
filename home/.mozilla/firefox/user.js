@@ -20,3 +20,5 @@ user_pref("browser.startup.page", 3);
 user_pref("ui.key.menuAccessKeyFocuses", false);
 // https://github.com/akhodakivskiy/VimFx/blob/master/documentation/options.md#find_from_top_of_viewport
 user_pref("extensions.VimFx.find_from_top_of_viewport", false);
+user_pref("accessibility.typeaheadfind", false);
+user_pref("accessibility.typeaheadfind.manual", false);
