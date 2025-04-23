@@ -58,7 +58,7 @@
     "./scripts/listen_node")
 
 (defpoll longdate :interval "10s"
-    "date '+%a, %b %d %Y'")
+    "date '+%a, %d %b %Y'")
 
 (deflisten time "clock")
 
