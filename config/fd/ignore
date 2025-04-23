@@ -1,2 +1,18 @@
 node_modules
 .git/
+
+# empty file
+.gitkeep
+
+## binaries
+# images
+*.svg
+*.SVG
+*.png
+*.PNG
+*.jpg
+*.JPG
+
+# fonts
+*.ttf
+*.TTF
