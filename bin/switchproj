@@ -35,13 +35,22 @@ if [ -z "$TMUX" ] && ! pgrep -x tmux > /dev/null 2>&1; then
     exit
 fi
 
+# -t="..."
+#   ^ The equals sign in the "-t": target session argument usage below is VERY important,
+#     it enforces exact matching on session names.
+#
+#     Otherwise, with whitepspace -t "..." the behavior is to partially match the session name.
+#
+#     See: https://github.com/tmux/tmux/issues/346
+#          https://superuser.com/questions/1174750/tmux-has-session-search-is-prefix-matching
+
 # tmux session already exists
-tmux has-session -t "$selected_name" > /dev/null 2>&1 || \
-    tmux new-session -ds "$selected_name" -c "$selected"
+tmux has-session -t="$selected_name" > /dev/null 2>&1 || \
+    tmux new-session -d -s "$selected_name" -c "$selected"
 
 # not in tmux session and tmux is running
 [ -z "$TMUX" ] && \
-    (tmux attach-session -t "$selected_name"; exit)
+    (tmux attach-session -t="$selected_name"; exit)
 
 # inside tmux session
-tmux switch-client -t "$selected_name"
+tmux switch-client -t="$selected_name"
