@@ -30,7 +30,7 @@ d="$(dirname "$selected")"
 [ "$d" = ~/Sync ] || selected_name="$(basename "$d")/$selected_name"
 
 # not in tmux session and tmux is not running
-if [ -z "$TMUX" ] && ! pgrep tmux > /dev/null 2>&1; then
+if [ -z "$TMUX" ] && ! pgrep -x tmux > /dev/null 2>&1; then
     tmux new-session -s "$selected_name" -c "$selected"
     exit
 fi
