@@ -95,11 +95,6 @@ clear_terminal_all() {
     zle -R
 }
 
-open_tmux_scratch_prompt() {
-    scratchtmux
-    zle reset-prompt
-}
-
 open_neovim_cwd() {
     [ -f "./.venv/bin/activate" ] && . ./.venv/bin/activate
     [ -f "./.env/bin/activate" ] && . ./.env/bin/activate
@@ -183,7 +178,6 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     tree="tree --gitignore"
 
 zle -N clear_terminal_all
-zle -N open_tmux_scratch_prompt
 zle -N open_project_session
 zle -N tmux_switch_session
 zle -N open_neovim_cwd
@@ -199,7 +193,6 @@ bindkey -v "^?" backward-delete-char
 bindkey -M menuselect "^[[Z" reverse-menu-complete  # enable shift+tab functionality
 
 bindkey "^f" open_project_session
-bindkey "^\`" open_tmux_scratch_prompt
 bindkey "^n" open_neovim_cwd
 bindkey "^L" clear_terminal_all
 bindkey "^j" tmux_switch_session
