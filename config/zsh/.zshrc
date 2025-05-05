@@ -39,7 +39,8 @@ source "${ZDOTDIR:-$HOME}/vi.zsh"
 #     || zcompile -R -- "${ZDOTDIR:-$HOME}/tmux.zsh.zwc" "${ZDOTDIR:-$HOME}/tmux.zsh"
 # source "${ZDOTDIR:-$HOME}/tmux.zsh"
 
-stty stop undef	 # disable ctrl-s to freeze terminal
+# disable flow control keybinds which freeze/unfreeze terminal: ctrl-s (XOFF) and ctrl-q (XON)
+stty -ixon
 
 source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/you-should-use.plugin.zsh"
 source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/fzf-key-bindings.zsh"
