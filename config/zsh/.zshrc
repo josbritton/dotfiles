@@ -99,8 +99,8 @@ clear_terminal_all() {
 open_neovim_cwd() {
     [ -f "./.venv/bin/activate" ] && . ./.venv/bin/activate
     [ -f "./.env/bin/activate" ] && . ./.env/bin/activate
+    restore_stdio
     nvim .
-    zle redisplay
 }
 
 open_project_session() {
