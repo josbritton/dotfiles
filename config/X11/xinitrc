@@ -30,8 +30,7 @@ fi
 
 xsetroot -cursor_name left_ptr
 hsetroot -cover ~/Pictures/Wallpapers/surface/websrc/ms_duo_light_hr_web.jpg
-xset s on
-xset s 90
+xset s off -dpms
 
 dunst &
 sxhkd &

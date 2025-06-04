@@ -48,11 +48,6 @@ pactl set-default-sink alsa_output.usb-DIDI_AUDIO_TC100COA-01.analog-stereo
 
 alacritty --daemon &
 
-# pgrep -x vesktop >/dev/null 2>&1 || vesktop &
-
-pgrep -x thunderbird >/dev/null 2>&1 || thunderbird &
-pgrep -x discord-canary >/dev/null 2>&1 || discord-canary &
-
 (pkill -USR1 -x sxhkd || true) &
 
 eww close-all && eww open-many xbar:primary xbar:secondary --arg primary:screen=0 --arg secondary:screen=1
