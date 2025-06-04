@@ -16,6 +16,8 @@
     insteadOf = git@github.com:JosBritton
 [includeIf "hasconfig:remote.*.url:git@github.com:JosBritton/**"]
 	path = ~/.config/git/user/JosBritton
+[includeIf "hasconfig:remote.*.url:git@git.swifthomelab.net:josbritton/**"]
+	path = ~/.config/git/user/JosBritton
 [push]
     autoSetupRemote = true
 [submodule]
