@@ -127,6 +127,7 @@ local opts=(
     histignoredups
     histfindnodups
     glob_dots
+    no_nomatch
 )
 setopt $opts
 
