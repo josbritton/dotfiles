@@ -4,6 +4,7 @@ bind 'set colored-stats on'
 #bind 'set colored-completion-prefix on'
 bind '"\e[Z": menu-complete-backward'
 bind TAB:menu-complete
+bind 'set completion-ignore-case on'
 source /usr/share/fzf/completion.bash
 source /usr/share/fzf/key-bindings.bash
 HISTCONTROL=ignoredups:erasedups
