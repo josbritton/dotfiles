@@ -22,6 +22,7 @@ export GTK_THEME="Adwaita:dark"
 export PARALLEL_HOME="${XDG_CONFIG_HOME:-$HOME/.config}/parallel"
 export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.config}"/java
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
+export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}"/readline/inputrc
 
 # https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export _JAVA_AWT_WM_NONREPARENTING="1"
