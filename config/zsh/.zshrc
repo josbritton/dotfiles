@@ -145,7 +145,6 @@ setopt $opts
 source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dircolors.zsh"
 
 alias fetch="fastfetch" \
-    rsyncright="rsync --info=progress2 --no-i-r -a" \
     ta="tmux attach -t" \
     tad="tmux attach -d -t" \
     ts="tmux new-session -s" \
