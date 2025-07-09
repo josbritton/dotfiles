@@ -56,10 +56,6 @@ make installcheck
 
 ## Uninstall
 
-*Note: uninstall may show false-positive errors indicating that a link
-could not be found, this is consistent with the link not being
-installed in the first place and can be disregarded.*
-
 ```bash
 make uninstall
 ```

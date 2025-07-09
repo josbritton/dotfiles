@@ -37,5 +37,5 @@ $_dest_target:
 EOF
 
 cat <<EOF >> "$_tmpfs/uninstall.make"
-	unlink "$_dest"
+	rm -f "$_dest"
 EOF
