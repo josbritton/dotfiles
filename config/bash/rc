@@ -13,3 +13,6 @@ alias nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin"
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/history"
 export HISTFILESIZE=
 export HISTSIZE=
+alias ll="ls -la"
+alias l="ls"
+alias la="ls -a"
