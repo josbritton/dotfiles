@@ -144,28 +144,6 @@ setopt $opts
     "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dircolors.zsh"
 source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dircolors.zsh"
 
-alias fetch="fastfetch" \
-    ta="tmux attach -t" \
-    tad="tmux attach -d -t" \
-    ts="tmux new-session -s" \
-    tl="tmux list-sessions" \
-    tksv="tmux kill-server" \
-    tkss="tmux kill-session -t" \
-    tmuxconf="$EDITOR ~/.config/tmux/tmux.conf" \
-    pacex="pacman -Qe" \
-    pacorph="pacman -Qdt" \
-    pacexnoreq="pacman -Qet" \
-    statoctal="stat -c '%a'" \
-    ll="LC_ALL=C ls -hN1F --color=auto --group-directories-first -al" \
-    la="LC_ALL=C ls -hN1F --color=auto --group-directories-first -A" \
-    l="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
-    gs="git status" \
-    t="bgnull alacritty" \
-    f="bgnull thunar" \
-    gb="gh browse" \
-    nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin" \
-    gcp="git cherry-pick --signoff"
-
 # overrides
 alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     journalctl="journalctl --all --full --reverse" \
@@ -178,6 +156,28 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME:-$HOME/.config}/yarn/config"' \
     wget="wget --hsts-file="${XDG_CACHE_HOME:-$HOME/.cache}/wget-hsts"" \
     tree="tree --gitignore -C"
+
+alias fetch="fastfetch" \
+    ta="tmux attach -t" \
+    tad="tmux attach -d -t" \
+    ts="tmux new-session -s" \
+    tl="tmux list-sessions" \
+    tksv="tmux kill-server" \
+    tkss="tmux kill-session -t" \
+    tmuxconf="$EDITOR ~/.config/tmux/tmux.conf" \
+    pacex="pacman -Qe" \
+    pacorph="pacman -Qdt" \
+    pacexnoreq="pacman -Qet" \
+    statoctal="stat -c '%a'" \
+    ll="ls -la" \
+    la="ls -A" \
+    l="ls" \
+    gs="git status" \
+    t="bgnull alacritty" \
+    f="bgnull thunar" \
+    gb="gh browse" \
+    nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin" \
+    gcp="git cherry-pick --signoff"
 
 zle -N clear_terminal_all
 zle -N open_project_session
