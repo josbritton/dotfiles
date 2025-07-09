@@ -36,6 +36,9 @@ install: register
 uninstall: register
 	@$(MAKE) -s --no-print-directory -f "$(REGISTER_RUN_DIR)/uninstall.make" all
 
+.PHONY: test
+test: installcheck
+
 .PHONY: installcheck
 installcheck: register
 	@$(MAKE) -s --no-print-directory -f "$(REGISTER_RUN_DIR)/installcheck.make" all
