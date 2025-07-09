@@ -178,7 +178,7 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     nvidia-settings="nvidia-settings --config="${XDG_CONFIG_HOME:-$HOME/.config}/nvidia/settings"" \
     yarn='yarn --use-yarnrc "${XDG_CONFIG_HOME:-$HOME/.config}/yarn/config"' \
     wget="wget --hsts-file="${XDG_CACHE_HOME:-$HOME/.cache}/wget-hsts"" \
-    tree="tree --gitignore"
+    tree="tree --gitignore -C"
 
 zle -N clear_terminal_all
 zle -N open_project_session
