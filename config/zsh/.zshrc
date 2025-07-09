@@ -113,9 +113,12 @@ tmux_switch_session() {
     zle reset-prompt
 }
 
+# this is the maximum value
+# LONG_MAX from limits.h (2^31-1)
+HISTSIZE=2147483647
+SAVEHIST=2147483647
+
 HISTDUP=erase
-HISTSIZE=10000000
-SAVEHIST=10000000
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/zsh/history"
 
 local opts=(
