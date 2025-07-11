@@ -8,7 +8,7 @@ INSTALL_ALIASES = tmux fontconfig ccache alacritty thunderbird zsh pipewire \
 		  neovim steam bspwm xinit xorg-nvidia git zathura \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
-		  diff_pager readline
+		  diff_pager readline imv
 
 define INSTALL_TARGET
 .PHONY: all
@@ -189,6 +189,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/readline)" \
 		"$(XDG_CONFIG_HOME)/readline" \
 		"readline"
+	./register "$$(realpath config/imv)" \
+		"$(XDG_CONFIG_HOME)/imv" \
+		"imv"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \
