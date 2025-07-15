@@ -23,6 +23,9 @@ export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}"/readline/inputrc
 export PSQL_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/psql_history"
 export XDG_CURRENT_DESKTOP=river
+export XDG_SESSION_DESKTOP=river
+export SDL_VIDEODRIVER=wayland
+export QT_QPA_PLATFORM=wayland
 
 # https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export _JAVA_AWT_WM_NONREPARENTING="1"
