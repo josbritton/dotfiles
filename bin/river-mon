@@ -1,0 +1,13 @@
+#!/bin/sh
+
+for n in $(seq $2 $3); do
+    tags=$((1 << ($n - $2)))
+    echo "1: $1, 2: $2, 3: $3, n: $n, tags: $tags"
+
+    riverctl map normal Super $n spawn \
+	    "riverctl focus-output \"$1\" && riverctl set-focused-tags \"$tags\""
+    riverctl map normal Super+Shift $n spawn \
+	    "riverctl set-view-tags \"$tags\" && riverctl send-to-output \"$1\""
+done
+
+eww open-many waybar:"$1" --arg "$1":monitor="$1" --arg "$1":tags="[$(seq -s "," "$2" "$3")]"

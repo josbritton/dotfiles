@@ -1,0 +1,16 @@
+#!/bin/sh
+
+
+## note: get wayland application IDs using `lswt`
+
+# enforce server side decorations by default
+riverctl rule-add -app-id "*" ssd
+
+# necessary for drawing split borders
+# riverctl rule-add -app-id "firefox" ssd
+# riverctl rule-add -app-id "steam" ssd
+# riverctl rule-add -app-id Thunar ssd
+# riverctl rule-add -app-id mpv ssd
+
+# disable compositor vsync for rdr2
+riverctl rule-add -app-id "steam_app_1174180" tearing

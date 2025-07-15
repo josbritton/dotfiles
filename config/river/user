@@ -1,0 +1,13 @@
+#!/bin/sh
+## edit this file according to your machine's values
+
+# display configuration
+wlr-randr --output DP-3 --mode 2560x1440@165Hz --pos 0,0
+wlr-randr --output DP-2 --mode 2560x1440@165Hz --pos 2560,0
+xrandr --output DP-3 --primary  # needed for clicks to register for some programs running under XWayland
+river-mon DP-3 1 4
+river-mon DP-2 5 8
+
+# audio device configuration
+pactl set-default-source alsa_input.usb-Soundcraft_Notepad-5-00.analog-stereo
+pactl set-default-sink alsa_output.usb-DIDI_AUDIO_TC100COA-01.analog-stereo

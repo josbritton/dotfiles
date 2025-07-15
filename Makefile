@@ -192,6 +192,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/imv)" \
 		"$(XDG_CONFIG_HOME)/imv" \
 		"imv"
+	./register "$$(realpath config/river)" \
+		"$(XDG_CONFIG_HOME)/river" \
+		"river"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \
@@ -254,6 +257,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/diff_pager)" \
 		"$(BIN_HOME)/diff_pager" \
 		"diff_pager"
+	./register "$$(realpath bin/river-mon)" \
+		"$(BIN_HOME)/river-mon" \
+		"river"
 
 	./register "$$(realpath home/.zshenv)" \
 		"$(HOME)/.zshenv" \

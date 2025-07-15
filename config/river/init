@@ -1,0 +1,51 @@
+#!/bin/sh
+
+root="$XDG_CONFIG_HOME/river"
+[ -z "$XDG_CONFIG_HOME" ] && root="$HOME/.config/river"
+
+## move to user section
+swaybg -i ~/Pictures/Wallpapers/duo_light.jpg -m fill &
+
+eww daemon
+"$root/user"
+
+# is there a way to configure display of color previews based on file path?
+
+# disable any mouse acceleration
+riverctl input "pointer-*" accel-profile none
+
+# keyboard key repeat rate
+# note: reversed order of parameters compared to xorg config
+riverctl set-repeat 32 225
+
+# allows vsync to be disabled if requested by the view
+# note: compositor-level vsync can be enabled/disabled for a view using RULES
+# if a rule is set, river will ignore the preference of the view
+riverctl allow-tearing enabled
+
+# Declare a passthrough mode. This mode has only a single mapping to return to
+# normal mode. This makes it useful for testing a nested wayland compositor
+riverctl declare-mode passthrough
+
+riverctl set-cursor-warp on-output-change
+
+riverctl border-color-focused 0x33ccff
+riverctl border-color-unfocused 0x595959
+
+riverctl default-attach-mode bottom
+
+"$root/ruleset"
+"$root/keybinds"
+
+# river will send the process group of the init executable SIGTERM on exit
+#riverctl default-layout riverbsp
+#"$XDG_CONFIG_HOME/river/riverbsp/bin/riverbsp" || "$HOME/.config/river/riverbsp/bin/riverbsp" &
+riverctl default-layout bsp-layout
+river-bsp-layout --inner-gap 3 --outer-gap 6 --split-perc 0.5 &
+
+dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
+## uncomment below if screencasting gives issues, it may help
+# systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr wireplumber
+# systemctl --user start wireplumber
+
+# eww open-many waybar:i waybar:ii --arg i:monitor=1 --arg ii:monitor=0 --arg i:idx=0 --arg ii:idx=1
