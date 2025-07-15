@@ -11,11 +11,11 @@ style = "Bold"
 
 [font.bold_italic]
 family = "DejaVuSansM Nerd Font"
-style = "Bold Italic"
+style = "Bold Oblique"
 
 [font.italic]
 family = "DejaVuSansM Nerd Font"
-style = "Italic"
+style = "Oblique"
 
 [font.normal]
 family = "DejaVuSansM Nerd Font"
