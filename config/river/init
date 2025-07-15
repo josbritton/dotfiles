@@ -43,9 +43,6 @@ riverctl default-attach-mode bottom
 riverctl default-layout bsp-layout
 river-bsp-layout --inner-gap 3 --outer-gap 6 --split-perc 0.5 &
 
+systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
 dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
-## uncomment below if screencasting gives issues, it may help
-# systemctl --user stop pipewire pipewire-media-session xdg-desktop-portal xdg-desktop-portal-wlr wireplumber
-# systemctl --user start wireplumber
-
-# eww open-many waybar:i waybar:ii --arg i:monitor=1 --arg ii:monitor=0 --arg i:idx=0 --arg ii:idx=1
+systemctl --user restart xdg-desktop-portal
