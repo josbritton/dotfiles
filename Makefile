@@ -5,10 +5,10 @@
 #	2. register your link under `register:` (follow the comment)
 
 INSTALL_ALIASES = tmux fontconfig ccache alacritty thunderbird zsh pipewire \
-		  neovim steam bspwm xinit xorg-nvidia git zathura \
+		  neovim steam river git zathura \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
-		  diff_pager readline imv
+		  diff_pager readline imv tofi
 
 define INSTALL_TARGET
 .PHONY: all
