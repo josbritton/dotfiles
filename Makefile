@@ -5,7 +5,7 @@
 #	2. register your link under `register:` (follow the comment)
 
 INSTALL_ALIASES = tmux fontconfig ccache alacritty thunderbird zsh pipewire \
-		  neovim steam river git zathura \
+		  neovim steam river git zathura xdg-portals \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
 		  diff_pager readline imv tofi
@@ -195,6 +195,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/river)" \
 		"$(XDG_CONFIG_HOME)/river" \
 		"river"
+	./register "$$(realpath config/xdg-desktop-portal)" \
+		"$(XDG_CONFIG_HOME)/xdg-desktop-portal" \
+		"xdg-portals"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \
