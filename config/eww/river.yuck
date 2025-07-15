@@ -59,7 +59,7 @@
         :limit-width 48
         :show-truncated true
         :yalign 0.5
-        :tooltip windowtitle))
+        :tooltip {windowtitle?.[0].title}))
 
 (deflisten windowtitle
     "river-bedload -minified -watch title")
