@@ -12,6 +12,13 @@ riverctl map normal Super B spawn firefox
 riverctl map normal Super Return spawn alacritty
 riverctl map normal Super Tab spawn "tofi-run | xargs riverctl spawn"
 
+## screenshots
+# fullscreen
+riverctl map normal None Print spawn 'mkdir -p "$(xdg-user-dir PICTURES)/Screenshots"; grim -o "$(river-bedload -print outputs | jq -r ".[] | select(.focused) | .name")" - | tee -p "$(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m-%d_%s.png)" | wl-copy && notify-send "Screenshot saved"'
+
+# selection (no freezing frame!)
+riverctl map normal Shift Print spawn 'mkdir -p "$(xdg-user-dir PICTURES)/Screenshots"; grim -g "$(slurp)" - | tee -p "$(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m-%d_%s.png)" | wl-copy && notify-send "Screenshot saved"'
+
 # lock the screen (spawn waylock)
 riverctl map normal Control+Alt L spawn waylock
 
