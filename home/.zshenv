@@ -1,7 +1,5 @@
 export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
 export CUDA_CACHE_PATH="${XDG_CACHE_HOME:-$HOME/.cache}/nv"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
-export XINITRC="${XDG_CONFIG_HOME:-$HOME/.config}/X11/xinitrc"
 export CARGO_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/cargo"
 export NPM_CONFIG_USERCONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/npm/config"
 export RUSTUP_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/rustup"
@@ -24,6 +22,7 @@ export _JAVA_OPTIONS=-Djava.util.prefs.userRoot="${XDG_CONFIG_HOME:-$HOME/.confi
 export DOCKER_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}"/docker
 export INPUTRC="${XDG_CONFIG_HOME:-$HOME/.config}"/readline/inputrc
 export PSQL_HISTORY="${XDG_STATE_HOME:-$HOME/.local/state}/psql_history"
+export XDG_CURRENT_DESKTOP=river
 
 # https://wiki.archlinux.org/title/Java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 export _JAVA_AWT_WM_NONREPARENTING="1"
