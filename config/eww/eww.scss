@@ -1,35 +1,32 @@
-* {
-  all: unset;
+/* do not unset all, causes rendering artifacts somehow */
+button {
+  box-shadow: unset;
+  outline: unset;
+  min-width: unset;
+  min-height: unset;
+  margin: unset;
+  border: unset;
+  border-radius: unset;
+  background-image: unset;
+  transition: unset;
 }
-
-/* .windowtitle { */
-/*   transition: opacity 200ms; */
-/* } */
-/**/
-/* .windowtitle.active { */
-/*   opacity: 1; */
-/* } */
-/**/
-/* .windowtitle.inactive { */
-/*   opacity: 0; */
-/* } */
 
 .bar {
   background-color: #1d1f21;
   color: white;
   font-family: system-ui, sans-serif;
-  // margin: 0px 10px;
 }
 
 .workspaces button.unoccupied {
   color: #b3b3b3;
 }
-/* .workspaces button.occupied { */
-/*   background-color: #292929; */
-/* } */
 
 .bar button {
   padding: 0px 4px;
+}
+
+.workspaces button.occupied {
+  color: #fff;
 }
 
 .bar button:hover,
@@ -53,6 +50,54 @@
   border-bottom: 2px solid #327bd1;
 }
 
-.systray {
-  padding-right: 10px;
+tooltip {
+  background-color: #1d1f21;
+  border-radius: 6px;
+  border: 1px solid #444444;
+}
+
+tooltip * {
+  margin: unset;
+  padding: unset;
+}
+
+.systray menu {
+  color: #fff;
+  margin: unset;
+  border: unset;
+  padding: unset;
+
+  menuitem {
+    background-color: #1d1f21;
+    padding: 1px 0px 1px 4px;
+    &:first-child {
+      border-radius: 6px 6px 0px 0px;
+    }
+    &:last-child {
+      border-radius: 0px 0px 6px 6px;
+    }
+  }
+  menuitem arrow {
+    min-width: 16px;
+    min-height: 16px;
+
+    &:dir(ltr) {
+      -gtk-icon-source: -gtk-icontheme('pan-end-symbolic');
+      margin-left: 10px;
+      margin-right: 0;
+    }
+  }
+  separator {
+    background-color: #2a2a2a;
+    padding-top: 1px;
+    padding-bottom: 0px;
+
+    &:last-child {
+      padding: unset;
+    }
+  }
+
+  menuitem:hover {
+    background-color: #292929;
+  }
 }
