@@ -10,4 +10,10 @@ for n in $(seq $2 $3); do
 	    "riverctl set-view-tags \"$tags\" && riverctl send-to-output \"$1\""
 done
 
+
+if [ ! -f "${XDG_CONFIG_HOME:-$HOME/.config}/eww/config.yuck" ]; then
+    echo "Creating eww config from defaults..."
+    cp "${XDG_CONFIG_HOME:-$HOME/.config}/eww/updates/defaults.yuck" "${XDG_CONFIG_HOME:-$HOME/.config}/eww/config.yuck"
+fi
+
 eww open-many waybar:"$1" --arg "$1":monitor="$1" --arg "$1":tags="[$(seq -s "," "$2" "$3")]"

@@ -15,9 +15,14 @@
              :orientation "h"
              :space-evenly true
              :prepend-new true)
+    (button :class "warning config-update"
+            :visible { user-config-version < config-version }
+            :onclick ""
+            :tooltip "Click to update eww config version"
+            "config")
     (button time)
     (button :tooltip longdate
-            :onrightclick "echo '${date}' | ${clipcmd} && notify-send 'Copied to clipboard.'"
+            :onrightclick "printf '${date}${copy-date-newline ? "\\n" : ""}' | ${clipcmd} && notify-send 'Copied to clipboard.'"
             date)))
 
 (defwidget workspaces [monitor tags]

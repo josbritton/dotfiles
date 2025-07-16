@@ -6,5 +6,9 @@
 (defpoll date :interval "10s"
     "date '+%Y-%m-%d'")
 
-(include "./river.yuck")
-;;(include "./bspwm.yuck")
+(include "config.yuck")
+(include "bar/river.yuck")
+;;(include "bar/bspwm.yuck")
+
+(defvar config-version
+    1.0)

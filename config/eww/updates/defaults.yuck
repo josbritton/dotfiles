@@ -1,0 +1,31 @@
+;; Transition between tag status updates with an easing animation
+(defvar animate-tag-switching
+    false)
+
+;; Transition between window title updates with an easing animation
+(defvar animate-title-updates
+    false)
+
+;; Transition between context menu updates with an easing animation
+(defvar animate-popup-context-menu
+    false)
+
+;; Transition between tooltip popups updates with an easing animation
+(defvar animate-popup-tooltips
+    false)
+
+;; Display tmux session count on right hand side of bar (further functionality tbd)
+(defvar enable-tmux-panel
+    false)
+
+;; Copy date to clipboard suffixed with a newline character
+(defvar copy-date-newline
+    true)
+
+;; ;; Display 'Activate Linux' overlay (credit: Nycta)
+;; (defvar enable-activate-linux
+;;     false)
+
+;; Do not manually edit this value
+(defvar user-config-version
+    1.0)
