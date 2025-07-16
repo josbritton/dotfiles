@@ -14,3 +14,6 @@ riverctl rule-add -app-id "*" ssd
 
 # disable compositor vsync for rdr2
 riverctl rule-add -app-id "steam_app_1174180" tearing
+
+# not working for some reason
+riverctl rule-add -app-id firefox -title "Page Info —*" float
