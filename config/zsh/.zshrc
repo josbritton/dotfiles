@@ -181,7 +181,8 @@ alias fetch="fastfetch" \
     f="bgnull thunar" \
     gb="gh browse" \
     nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin" \
-    gcp="git cherry-pick --signoff"
+    gcp="git cherry-pick --signoff" \
+    screenshot="wlr-screenshot"
 
 zle -N clear_terminal_all
 zle -N open_project_session

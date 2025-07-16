@@ -8,7 +8,7 @@ INSTALL_ALIASES = tmux fontconfig ccache alacritty thunderbird zsh pipewire \
 		  neovim steam river git zathura xdg-portals \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
-		  diff_pager readline imv tofi
+		  diff_pager readline imv tofi wlr-screenshot
 
 define INSTALL_TARGET
 .PHONY: all
@@ -263,6 +263,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/river-mon)" \
 		"$(BIN_HOME)/river-mon" \
 		"river"
+	./register "$$(realpath bin/wlr-screenshot)" \
+		"$(BIN_HOME)/wlr-screenshot" \
+		"wlr-screenshot"
 
 	./register "$$(realpath home/.zshenv)" \
 		"$(HOME)/.zshenv" \

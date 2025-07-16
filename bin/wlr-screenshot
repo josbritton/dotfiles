@@ -1,0 +1,47 @@
+#!/bin/sh
+# shellcheck shell=dash
+# shellcheck disable=SC2039  # local is non-POSIX
+
+## wlr screenshot script
+
+usage() {
+    cat <<EOF
+wlr-screenshot 0.0.0 (000000000 2025-07-15) PRE-RELEASE
+
+Screenshot utility for Wlroots
+
+Usage: wlr-screenshot [OPTIONS]
+
+Options:
+  -v, --verbose
+          Set log level to 'DEBUG' if 'RUSTUP_LOG' is unset
+  -q, --quiet
+          Disable progress output, set log level to 'WARN' if 'RUSTUP_LOG' is unset
+  -y
+          Disable confirmation prompt
+      --default-host <DEFAULT_HOST>
+          Choose a default host triple
+      --default-toolchain <DEFAULT_TOOLCHAIN>
+          Choose a default toolchain to install. Use 'none' to not install any toolchains at all
+      --profile <PROFILE>
+          [default: default] [possible values: minimal, default, complete]
+  -c, --component <COMPONENT>
+          Comma-separated list of component names to also install
+  -t, --target <TARGET>
+          Comma-separated list of target names to also install
+      --no-update-default-toolchain
+          Don't update any existing default toolchain after install
+      --no-modify-path
+          Don't configure the PATH environment variable
+  -h, --help
+          Print help
+  -V, --version
+          Print version
+EOF
+}
+
+main() {
+    usage
+}
+
+main "$@" || exit 1
