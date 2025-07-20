@@ -13,9 +13,10 @@ alias nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin"
 HISTFILE="${XDG_STATE_HOME:-$HOME/.local/state}/bash/history"
 HISTFILESIZE=
 HISTSIZE=
-alias ll="ls -la"
-alias l="ls"
-alias la="ls -a"
+alias ll="ls -la" \
+    l="ls" \
+    la="ls -a" \
+    tree="tree --gitignore -C"
 
 # after each command, save and reload history
 # emulates SHARE_HISTORY option in zsh
