@@ -6,6 +6,7 @@ root="$XDG_CONFIG_HOME/river"
 ## move to user section
 swaybg -i ~/Pictures/Wallpapers/duo_light.jpg -m fill &
 
+alacritty --daemon &
 eww daemon
 "$root/user"
 
