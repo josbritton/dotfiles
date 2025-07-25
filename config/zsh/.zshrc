@@ -182,7 +182,8 @@ alias fetch="fastfetch" \
     gb="gh browse" \
     nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin" \
     gcp="git cherry-pick --signoff" \
-    screenshot="wlr-screenshot"
+    screenshot="wlr-screenshot" \
+    treedu="tree --du --si"
 
 zle -N clear_terminal_all
 zle -N open_project_session
