@@ -61,7 +61,7 @@
 (label :class "windowtitle"
         :text {windowtitle?.[0].title}
         :visible {jq("${outputs}", ".[] | select(.name == \"${monitor}\")")?.focused ?: false}
-        :limit-width 48
+        :limit-width { window-title-len-max-chr == -1 ? 2147483647 : window-title-len-max-chr } ;; i32 max
         :show-truncated true
         :yalign 0.5
         :tooltip {windowtitle?.[0].title}))

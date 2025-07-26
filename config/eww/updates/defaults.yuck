@@ -26,6 +26,10 @@
 ;; (defvar enable-activate-linux
 ;;     false)
 
+;; Maximum displayed window title characters before text is truncated (-1 disables the limit)
+(defvar window-title-len-max-chr
+    48)
+
 ;; Do not manually edit this value
 (defvar user-config-version
     1.0)
