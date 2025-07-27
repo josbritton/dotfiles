@@ -9,7 +9,7 @@ riverctl map normal Super+Shift R spawn \
 
 # launch programs
 riverctl map normal Super B spawn firefox
-riverctl map normal Super Return spawn "alacritty msg create-window"
+riverctl map normal Super Return spawn footclient
 riverctl map normal Super Tab spawn "tofi-run | xargs riverctl spawn"
 
 ## screenshots

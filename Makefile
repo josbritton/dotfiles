@@ -4,7 +4,7 @@
 #	1. add alias to list below if you want to have it installed
 #	2. register your link under `register:` (follow the comment)
 
-INSTALL_ALIASES = tmux fontconfig ccache alacritty thunderbird zsh pipewire \
+INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  neovim steam river git zathura xdg-portals tealdeer \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
