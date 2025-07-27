@@ -70,6 +70,10 @@ tooltip > box {
   outline: 2px solid rgba(255, 0, 0, 0.9);
 }
 
+box.systray {
+  padding: 0px 8px;
+}
+
 .systray menu {
   color: #fff;
   margin: unset;
