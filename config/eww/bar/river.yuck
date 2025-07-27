@@ -85,5 +85,5 @@
         :height "30px"
         :anchor "top center")
     :exclusive true
-    :focusable false
+    :focusable "ondemand"
 (bar :tags tags :monitor monitor :clipcmd "wl-copy"))
