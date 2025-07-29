@@ -18,5 +18,9 @@ riverctl rule-add -app-id "steam_app_*" tearing
 # spawn Steam games on tag 1
 riverctl rule-add -app-id "steam_app_*" tags 1
 
+riverctl rule-add -app-id eu4 fullscreen
+riverctl rule-add -app-id eu4 tearing
+riverctl rule-add -app-id eu4 tags 1
+
 # not working for some reason
 riverctl rule-add -app-id firefox -title "Page Info —*" float
