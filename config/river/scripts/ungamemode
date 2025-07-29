@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# Mostly a proof of concept for now.
+
+# restore bindings
+riverctl enter-mode normal
+
+# unmap cursor from monitor
+riverctl input pointer-5426-138-Razer_Razer_Viper_Mini map-to-output disable
+
+notify-send "Normal mode restored"

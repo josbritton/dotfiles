@@ -1,0 +1,21 @@
+#!/bin/sh
+# ARGS:
+#   $1: OUTPUT_NAME
+
+if [ -z "$1" ]; then
+    echo "Err: Output not specified!"
+    exit 1
+fi
+
+# Mostly a proof of concept for now.
+
+riverctl focus-output "$1"
+riverctl set-focused-tags 1
+
+# disable essentially all bindings
+riverctl enter-mode gamemode
+
+# map cursor to monitor
+riverctl input pointer-5426-138-Razer_Razer_Viper_Mini map-to-output "$1"
+
+notify-send "Gamemode started"

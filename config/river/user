@@ -8,6 +8,9 @@ xrandr --output DP-3 --primary  # needed for clicks to register for some program
 river-mon DP-3 1 4
 river-mon DP-2 5 8
 
+# spawn Steam games on primary monitor
+riverctl rule-add -app-id "steam_app_*" output DP-3
+
 # audio device configuration
 pactl set-default-source alsa_input.usb-Soundcraft_Notepad-5-00.analog-stereo
 pactl set-default-sink alsa_output.usb-DIDI_AUDIO_TC100COA-01.analog-stereo

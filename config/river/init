@@ -28,6 +28,8 @@ riverctl allow-tearing enabled
 # normal mode. This makes it useful for testing a nested wayland compositor
 riverctl declare-mode passthrough
 
+riverctl declare-mode gamemode
+
 riverctl set-cursor-warp on-output-change
 
 riverctl border-color-focused 0x33ccff
