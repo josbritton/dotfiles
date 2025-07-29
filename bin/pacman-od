@@ -1,0 +1,3 @@
+#!/bin/sh
+# pacman [o]pt [d]eps
+pacman -Qnei | awk '/^Name[[:space:]]*:/ {if (pkg) print pkg; pkg=""; name=$0; optdeps=0; next} /^Optional Deps[[:space:]]*:/ {if ($0 ~ /: None$/) {skip=1} else {optdeps=1; pkg=name ORS $0; skip=0}; next} skip {next} /^[[:space:]]+/ && optdeps {pkg = pkg ORS $0; next} /^[^[:space:]]/ {optdeps=0} END {if (pkg) print pkg}' | less

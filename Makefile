@@ -5,7 +5,7 @@
 #	2. register your link under `register:` (follow the comment)
 
 INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
-		  neovim steam river git zathura xdg-portals tealdeer \
+		  neovim steam river git zathura xdg-portals tealdeer pacman \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
 		  diff_pager readline imv tofi wlr-screenshot mangohud
@@ -272,6 +272,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/wlr-screenshot)" \
 		"$(BIN_HOME)/wlr-screenshot" \
 		"wlr-screenshot"
+	./register "$$(realpath bin/pacman-od)" \
+		"$(BIN_HOME)/pacman-od" \
+		"pacman"
 
 	./register "$$(realpath home/.zshenv)" \
 		"$(HOME)/.zshenv" \
