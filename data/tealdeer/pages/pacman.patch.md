@@ -14,6 +14,3 @@
 
 - List explicitly installed native packages:
 `pacman -Qne`
-
-- List explicitly installed native packages with info (includes optional deps):
-`pacman -Qnei`
