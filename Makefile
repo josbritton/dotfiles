@@ -217,6 +217,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath data/applications/Alacritty.desktop)" \
 		"$(XDG_DATA_HOME)/applications/Alacritty.desktop" \
 		"alacritty"
+	./register "$$(realpath data/tealdeer)" \
+		"$(XDG_DATA_HOME)/tealdeer" \
+		"tealdeer"
 
 	./register "$$(realpath bin/switchproj)" \
 		"$(BIN_HOME)/switchproj" \
