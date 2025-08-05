@@ -260,8 +260,8 @@ local promptdircolors=(
 "$promptcolors[green]"
 "$promptcolors[blue]"
 )
-local prompt_prefix="${bold_prompt:+%B}${promptdircolors[$(( $RANDOM % ${#promptdircolors[@]} + 1 ))]}%50<...<%~%<<%f${bold_prompt:+%b} "
-local prompt_suffix="${bold_prompt:+%B}$promptcolors[white]${user}$promptcolors[grey]${user:+${host:+@}}${host}%#%f${bold_prompt:+%b} "
+local prompt_prefix="${bold_prompt:+%B}$promptcolors[grey]${host:+($host) }${promptdircolors[$(( $RANDOM % ${#promptdircolors[@]} + 1 ))]}%50<...<%~%<<%f${bold_prompt:+%b} "
+local prompt_suffix="${bold_prompt:+%B}$promptcolors[white]${user}$promptcolors[grey]%#%f${bold_prompt:+%b} "
 
 unset RPROMPT
 PROMPT="$prompt_prefix$prompt_suffix"
