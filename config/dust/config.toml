@@ -1,0 +1,4 @@
+reverse = true
+ignore-hidden = false
+# if `output-format` is unset, dust uses binary prefix
+# set to `si` for powers of 1000

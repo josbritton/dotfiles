@@ -8,7 +8,8 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  neovim steam river git zathura xdg-portals tealdeer pacman \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
-		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode
+		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
+		  dust
 
 define INSTALL_TARGET
 .PHONY: all
@@ -207,6 +208,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/gamemode.ini)" \
 		"$(XDG_CONFIG_HOME)/gamemode.ini" \
 		"gamemode"
+	./register "$$(realpath config/dust)" \
+		"$(XDG_CONFIG_HOME)/dust" \
+		"dust"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \
