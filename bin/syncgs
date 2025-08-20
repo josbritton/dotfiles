@@ -1,6 +1,6 @@
 #!/bin/sh
 find "$HOME/Sync" "$HOME/Sync/alt" -maxdepth 2 -mindepth 2 -name .git -type d -execdir zsh -c '
-    printf "---\n"
+    printf -- "---\n%s\n" "$PWD" | sed "s|$HOME|~|g"
     git -c color.ui=always status --short
     printf "\n"
 ' \; -prune
