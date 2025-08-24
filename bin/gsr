@@ -4,6 +4,11 @@ set -e
 # gsr (git status remote)
 # Simple script to display remote git status for each configured remote.
 
+if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
+    echo "no commits yet."
+    exit 0
+fi
+
 branch="$(git rev-parse --abbrev-ref HEAD)"
 tracked="$(git config --get "branch.$branch.remote" || true)"
 remotes=$(git remote)
