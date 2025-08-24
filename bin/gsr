@@ -1,0 +1,50 @@
+#!/bin/sh
+set -e
+
+# gsr (git status remote)
+# Simple script to display remote git status for each configured remote.
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+tracked="$(git config --get "branch.$branch.remote" || true)"
+remotes=$(git remote)
+
+## header
+for remote in $remotes; do
+    f='%s\t'
+    if [ "$remote" = "$tracked" ]; then
+        f='%s*\t'
+    fi
+
+    # shellcheck disable=SC2059 # using variable AS format string
+    printf "$f" "$remote"
+done
+printf "%s\n" HEAD
+
+## row
+head_behind=
+head_ahead=
+for remote in $remotes; do
+    behind=
+    ahead=
+    if git rev-parse --verify "$remote/$branch" >/dev/null 2>&1; then
+        behind="$(git rev-list --count HEAD "^$remote/$branch")"
+        ahead="$(git rev-list --count "$remote/$branch" ^HEAD)"
+
+        if [ -z "$head_behind" ] || [ "$ahead" -gt "${head_behind:-0}" ]; then
+            head_behind="$ahead"
+        fi
+
+        if [ -z "$head_ahead" ] || [ "$behind" -lt "${head_ahead:-0}" ]; then
+            head_ahead="$behind"
+        fi
+    fi
+
+    [ "$behind" = "0" ] && behind=
+    [ "$ahead" = "0" ] && ahead=
+
+    printf '%s%s\t' "${ahead:++$ahead}" "${behind:+-$behind}"
+done
+[ "$head_behind" = "0" ] && head_behind=
+[ "$head_ahead" = "0" ] && head_ahead=
+
+printf '%s%s\n' "${head_ahead:++$head_ahead}" "${head_behind:+-$head_behind}"

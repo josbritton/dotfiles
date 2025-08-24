@@ -9,7 +9,7 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
-		  dust
+		  dust gsr
 
 define INSTALL_TARGET
 .PHONY: all
@@ -285,6 +285,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/pacman-od)" \
 		"$(BIN_HOME)/pacman-od" \
 		"pacman"
+	./register "$$(realpath bin/gsr)" \
+		"$(BIN_HOME)/gsr" \
+		"gsr"
 
 	./register "$$(realpath home/.zshenv)" \
 		"$(HOME)/.zshenv" \
