@@ -1,0 +1,11 @@
+#!/bin/sh
+
+# this is mostly a terrible script
+
+branch="$(git rev-parse --abbrev-ref HEAD)"
+tracked="$(git config --get "branch.$branch.remote" || exit 1)"
+url="$(git remote get-url "$tracked" | sed 's/^git@\(.*\):\/*\(.*\).git/https:\/\/\1\/\2/')"
+host="$(ssh -G "$(echo "$url" | sed -E 's#^[a-z]+://([^/:]+).*#\1#')" | awk '/^hostname / {print $2}')"
+url="https://$host$(echo "$url" | sed -E 's#^[^/]+//[^/]+##')"
+
+xdg-open "$url"

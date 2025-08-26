@@ -179,7 +179,6 @@ alias fetch="fastfetch" \
     gs="git status" \
     t="bgnull alacritty" \
     f="bgnull thunar" \
-    gb="gh browse" \
     nvclean="nvim -c \"set clipboard=unnamedplus\" --clean -n --noplugin" \
     gcp="git cherry-pick --signoff" \
     screenshot="wlr-screenshot" \

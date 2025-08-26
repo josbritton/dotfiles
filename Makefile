@@ -9,7 +9,7 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
-		  dust gsr syncgsr
+		  dust gsr syncgsr gb
 
 define INSTALL_TARGET
 .PHONY: all
@@ -291,6 +291,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/syncgsr)" \
 		"$(BIN_HOME)/syncgsr" \
 		"syncgsr"
+	./register "$$(realpath bin/gb)" \
+		"$(BIN_HOME)/gb" \
+		"gb"
 
 	./register "$$(realpath home/.zshenv)" \
 		"$(HOME)/.zshenv" \
