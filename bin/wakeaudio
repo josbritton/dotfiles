@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Note: before tweaking this, ensure that:
+#   Preamp is 1. ON, and 2. volume adjustment is set such that tone would be audible
+ffmpeg -loglevel error -f lavfi -i "sine=frequency=2000:duration=1:sample_rate=48000" -f wav -c:a pcm_s16le - | pw-cat -p -
