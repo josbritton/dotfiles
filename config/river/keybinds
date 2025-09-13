@@ -11,6 +11,7 @@ riverctl map normal Super+Shift R spawn \
 riverctl map normal Super B spawn firefox
 riverctl map normal Super Return spawn footclient
 riverctl map normal Super Tab spawn "tofi-run | xargs riverctl spawn"
+riverctl map normal Super E spawn Thunar
 
 ## screenshots
 # fullscreen
