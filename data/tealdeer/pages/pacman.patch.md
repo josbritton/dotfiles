@@ -1,5 +1,8 @@
 > Patch:
 
+- List package contents:
+`pacman -Ql {{package}}`
+
 - Set package install reason to explicit:
 `pacman -D --asexplicit {{package}}`
 
