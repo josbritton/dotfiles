@@ -51,9 +51,9 @@ zstyle ":completion:*" cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcach
 zstyle ":completion:*" matcher-list "m:{a-z}={A-Z}"  # complete match any-case on lowercase only
 zstyle ':completion:*' verbose true
 zstyle ":completion:*" list-colors "${(s.:.)LS_COLORS}"
-zstyle ":completion:*" menu select=5  # only show menu for more than 5 options
 
 # start menu completion only if it could find no unambiguous initial string
+zstyle ":completion:*" menu select=1
 zstyle ':completion:*:correct:*'       insert-unambiguous true
 zstyle ':completion:*:corrections'     format $'%{\e[0;31m%}%d (errors: %e)%{\e[0m%}'
 zstyle ':completion:*:correct:*'       original true
@@ -135,6 +135,7 @@ local opts=(
     histfindnodups
     glob_dots
     no_nomatch
+    menu_complete  # insert first match
 )
 setopt $opts
 
