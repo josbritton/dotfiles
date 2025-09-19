@@ -257,12 +257,13 @@ if [[ -v SSH_CLIENT ]]; then
     host=%m
 fi
 
+local rr="$(pgrep -x -c zsh)"
 local promptdircolors=(
 "$promptcolors[red]"
 "$promptcolors[green]"
 "$promptcolors[blue]"
 )
-local prompt_prefix="${bold_prompt:+%B}$promptcolors[grey]${host:+($host) }${promptdircolors[$(( $RANDOM % ${#promptdircolors[@]} + 1 ))]}%50<...<%~%<<%f${bold_prompt:+%b} "
+local prompt_prefix="${bold_prompt:+%B}$promptcolors[grey]${host:+($host) }${promptdircolors[$(( $rr % ${#promptdircolors[@]} + 1 ))]}%50<...<%~%<<%f${bold_prompt:+%b} "
 local prompt_suffix="${bold_prompt:+%B}$promptcolors[white]${user}$promptcolors[grey]%#%f${bold_prompt:+%b} "
 
 unset RPROMPT
