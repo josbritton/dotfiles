@@ -163,16 +163,6 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     tree="tree --gitignore -C"
 
 alias fetch="fastfetch" \
-    ta="tmux attach -t" \
-    tad="tmux attach -d -t" \
-    ts="tmux new-session -s" \
-    tl="tmux list-sessions" \
-    tksv="tmux kill-server" \
-    tkss="tmux kill-session -t" \
-    tmuxconf="$EDITOR ~/.config/tmux/tmux.conf" \
-    pacex="pacman -Qe" \
-    pacorph="pacman -Qdt" \
-    pacexnoreq="pacman -Qet" \
     statoctal="stat -c '%a'" \
     ll="ls -la" \
     la="ls -A" \
