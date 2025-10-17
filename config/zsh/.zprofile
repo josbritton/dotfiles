@@ -10,5 +10,5 @@ export LESS='-R --use-color -Dd+r$Du+b$'
 export MANPAGER="less -R --use-color -Dd+r -Du+b"
 export MANROFFOPT="-P -c"
 
-gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+gsettings set org.gnome.desktop.interface color-scheme prefer-dark  # gtk4
 gsettings set org.gnome.desktop.wm.preferences button-layout ""

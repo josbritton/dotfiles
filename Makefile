@@ -9,7 +9,7 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
-		  dust gsr syncgsr gb wakeaudio
+		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4
 
 define INSTALL_TARGET
 .PHONY: all
@@ -211,6 +211,21 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/dust)" \
 		"$(XDG_CONFIG_HOME)/dust" \
 		"dust"
+	./register "$$(realpath config/gtk-2.0/gtkfilechooser.ini)" \
+		"$(XDG_CONFIG_HOME)/gtk-2.0/gtkfilechooser.ini" \
+		"gtk2"
+	./register "$$(realpath config/gtk-3.0/gtk.css)" \
+		"$(XDG_CONFIG_HOME)/gtk-3.0/gtk.css" \
+		"gtk3"
+	./register "$$(realpath config/gtk-3.0/settings.ini)" \
+		"$(XDG_CONFIG_HOME)/gtk-3.0/settings.ini" \
+		"gtk3"
+	./register "$$(realpath config/gtk-4.0/gtk.css)" \
+		"$(XDG_CONFIG_HOME)/gtk-4.0/gtk.css" \
+		"gtk4"
+	./register "$$(realpath config/gtk-4.0/settings.ini)" \
+		"$(XDG_CONFIG_HOME)/gtk-4.0/settings.ini" \
+		"gtk4"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \
