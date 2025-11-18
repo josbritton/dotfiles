@@ -1,3 +1,4 @@
+/// Misc
 user_pref("network.IDN_show_punycode", true);
 // disk cache in memory
 user_pref("browser.cache.disk.parent_directory", "/run/user/1000/firefox");
@@ -17,13 +18,15 @@ user_pref("widget.dmabuf.force-enabled", true);
 user_pref("browser.bookmarks.openInTabClosesMenu", false);
 user_pref("toolkit.legacyUserProfileCustomizations.stylesheets", true);
 user_pref("browser.startup.page", 3);
+// always show tabs in fullscreen mode
+user_pref("browser.fullscreen.autohide", false);
 user_pref("ui.key.menuAccessKeyFocuses", false);
 // https://github.com/akhodakivskiy/VimFx/blob/master/documentation/options.md#find_from_top_of_viewport
 user_pref("extensions.VimFx.find_from_top_of_viewport", false);
 user_pref("accessibility.typeaheadfind", false);
 user_pref("accessibility.typeaheadfind.manual", false);
 user_pref("browser.urlbar.trimURLs", false);
-// AI junk
+/// AI junk
 user_pref("browser.ml.enable", false);
 user_pref("browser.ml.chat.sidebar", false);
 user_pref("browser.ml.chat.shortcuts", false);
