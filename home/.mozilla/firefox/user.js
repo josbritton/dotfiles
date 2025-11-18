@@ -22,3 +22,4 @@ user_pref("ui.key.menuAccessKeyFocuses", false);
 user_pref("extensions.VimFx.find_from_top_of_viewport", false);
 user_pref("accessibility.typeaheadfind", false);
 user_pref("accessibility.typeaheadfind.manual", false);
+user_pref("browser.urlbar.trimURLs", false);
