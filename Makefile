@@ -251,6 +251,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath data/tealdeer)" \
 		"$(XDG_DATA_HOME)/tealdeer" \
 		"tealdeer"
+	./register "$$(realpath data/wireplumber)" \
+		"$(XDG_DATA_HOME)/wireplumber" \
+		"pipewire"
 
 	./register "$$(realpath bin/switchproj)" \
 		"$(BIN_HOME)/switchproj" \
