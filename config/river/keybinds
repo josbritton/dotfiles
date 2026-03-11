@@ -9,6 +9,8 @@ riverctl map normal Super+Shift R spawn \
 
 # launch programs
 riverctl map normal Super B spawn firefox
+riverctl map normal None XF86HomePage spawn firefox
+riverctl map normal None XF86WWW spawn firefox
 riverctl map normal Super Return spawn footclient
 riverctl map normal Super Tab spawn "tofi-run | xargs riverctl spawn"
 riverctl map normal Super E spawn Thunar
@@ -119,3 +121,20 @@ riverctl map passthrough Super F11 enter-mode normal
 
 riverctl map normal Super Q close
 
+## media keys
+MEDIAPLAYER="${MEDIAPLAYER:-Supersonic}"
+for mode in normal locked; do
+    riverctl map "$mode" Super Left spawn "playerctl -s -p $MEDIAPLAYER position 6-"
+    riverctl map "$mode" Super Right spawn "playerctl -s -p $MEDIAPLAYER position 5+"
+
+    riverctl map "$mode" None XF86AudioPlay spawn "playerctl -s -p $MEDIAPLAYER play-pause"
+    riverctl map "$mode" None XF86AudioPrev spawn "playerctl -s -p $MEDIAPLAYER previous"
+    riverctl map "$mode" None XF86AudioNext spawn "playerctl -s -p $MEDIAPLAYER next"
+    riverctl map "$mode" None XF86AudioStop spawn "playerctl -s -p $MEDIAPLAYER stop"
+    #riverctl map "$mode" None XF86AudioMute spawn "playerctl -s -p $MEDIAPLAYER volume 0.0"
+    riverctl map "$mode" None XF86AudioLowerVolume spawn "playerctl -s -p $MEDIAPLAYER volume 0.1-"
+    riverctl map "$mode" None XF86AudioRaiseVolume spawn "playerctl -s -p $MEDIAPLAYER volume 0.1+"
+
+    riverctl map "$mode" Super Down spawn "playerctl -s -p $MEDIAPLAYER volume 0.1-"
+    riverctl map "$mode" Super Up spawn "playerctl -s -p $MEDIAPLAYER volume 0.1+"
+done
