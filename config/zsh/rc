@@ -162,6 +162,12 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     wget="wget --hsts-file="${XDG_CACHE_HOME:-$HOME/.cache}/wget-hsts"" \
     tree="tree --gitignore -C"
 
+bottle() {
+    bottle="$1"
+    shift
+    flatpak run --command='bottles-cli' com.usebottles.bottles run -b "$bottle" -e "$@"
+}
+
 alias fetch="fastfetch" \
     statoctal="stat -c '%a'" \
     ll="ls -la" \
