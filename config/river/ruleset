@@ -1,8 +1,5 @@
 #!/bin/sh
 
-
-## note: get wayland application IDs using `lswt`
-
 # enforce server side decorations by default
 riverctl rule-add -app-id "*" ssd
 
@@ -22,5 +19,10 @@ riverctl rule-add -app-id eu4 fullscreen
 riverctl rule-add -app-id eu4 tearing
 riverctl rule-add -app-id eu4 tags 1
 
-# not working for some reason
-riverctl rule-add -app-id firefox -title "Page Info —*" float
+# currently not possible to match against firefox title, as all windows are created
+# with a default title and rules only apply to new views
+riverctl rule-add -app-id Zotero -title "Zotero Settings" float
+riverctl rule-add -app-id xdg-desktop-portal-gtk -title "Select cover image" float
+riverctl rule-add -app-id thunar float
+riverctl rule-add -app-id thunar -title "* - Thunar" no-float  # main window
+riverctl rule-add -app-id "Peak Meter" float  # main window
