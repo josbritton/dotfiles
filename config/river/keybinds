@@ -118,9 +118,4 @@ riverctl map normal Super F11 enter-mode passthrough
 riverctl map passthrough Super F11 enter-mode normal
 
 riverctl map normal Super Q close
-# riverctl map normal Control+Alt Delete exit
 
-riverctl map normal Control+Alt Delete spawn \
-    'notify-send "river: Quitting"; \
-        "$XDG_CONFIG_HOME/river/quit" \
-        || "$HOME/.config/river/quit"'

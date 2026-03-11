@@ -1,33 +1,22 @@
 #!/bin/sh
 
-root="$XDG_CONFIG_HOME/river"
-[ -z "$XDG_CONFIG_HOME" ] && root="$HOME/.config/river"
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 
-## move to user section
-swaybg -i ~/Pictures/Wallpapers/duo_light.jpg -m fill &
+riverctl map normal Control+Alt Delete spawn \
+    "${XDG_CONFIG_HOME}/river/quit"  # important
 
-foot -s &
-eww daemon
-"$root/user"
+"${XDG_CONFIG_HOME}/river/keybinds" &
+"${XDG_CONFIG_HOME}/river/ruleset" &
 
-# is there a way to configure display of color previews based on file path?
-
-# disable any mouse acceleration
 riverctl input "pointer-*" accel-profile none
 
-# keyboard key repeat rate
-# note: reversed order of parameters compared to xorg config
+riverctl keyboard-layout us
 riverctl set-repeat 32 225
 
-# allows vsync to be disabled if requested by the view
-# note: compositor-level vsync can be enabled/disabled for a view using RULES
-# if a rule is set, river will ignore the preference of the view
+# allow vsync to be disabled if requested by view
 riverctl allow-tearing enabled
 
-# Declare a passthrough mode. This mode has only a single mapping to return to
-# normal mode. This makes it useful for testing a nested wayland compositor
 riverctl declare-mode passthrough
-
 riverctl declare-mode gamemode
 
 riverctl set-cursor-warp on-output-change
@@ -37,15 +26,32 @@ riverctl border-color-unfocused 0x595959
 
 riverctl default-attach-mode bottom
 
-"$root/ruleset"
-"$root/keybinds"
-
-# river will send the process group of the init executable SIGTERM on exit
-#riverctl default-layout riverbsp
-#"$XDG_CONFIG_HOME/river/riverbsp/bin/riverbsp" || "$HOME/.config/river/riverbsp/bin/riverbsp" &
 riverctl default-layout bsp-layout
-river-bsp-layout --inner-gap 3 --outer-gap 6 --split-perc 0.5 &
+timestamp="$(date +%F-%R)"
+WAYLAND_DEBUG=1 river-bsp-layout \
+    --inner-gap 3 \
+    --outer-gap 6 \
+    --split-perc 0.5 > /tmp/river-bsp-layout."${timestamp}".log 2>&1 &
 
-systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
-dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=river
-systemctl --user restart xdg-desktop-portal
+# The user dbus session is shared across all login sessions and all ttys
+# Therefore, only tell it about the first wayland session
+if [ "$WAYLAND_DISPLAY" = "wayland-1" ]; then
+    dbus-update-activation-environment --systemd WAYLAND_DISPLAY \
+        XDG_CURRENT_DESKTOP DISPLAY QT_QPA_PLATFORMTHEME PATH
+    systemctl --user is-active xdg-desktop-portal.service \
+        && systemctl --user restart xdg-desktop-portal.service
+fi
+
+# workaround for wayland clipboard -> wine-xwayland sharing (extremely buggy)
+# wl-paste -t text -w xclip -selection clipboard &
+
+## logind must have a "graphical" session in order to correctly interpret idle events from wayland
+##   see: reddit.com/r/swaywm/comments/e8jk1o/-/fad68o7/
+# swayidle -w lock 'sudo -K; waylock -fork-on-lock' idlehint 60 &
+
+thunar --daemon &
+foot -C || echo "error: foot config check failed" >&2
+foot -s &
+eww daemon
+
+swaybg -i ~/Pictures/Wallpapers/duo_light.jpg -m fill &
