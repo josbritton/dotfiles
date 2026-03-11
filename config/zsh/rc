@@ -162,18 +162,6 @@ alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
     wget="wget --hsts-file="${XDG_CACHE_HOME:-$HOME/.cache}/wget-hsts"" \
     tree="tree --gitignore -C"
 
-# nag to use C-d more, remove when no longer needed
-_exit() {
-    notify-send "Interactive exit" "Use <b>Ctrl+d</b> instead of the exit command"
-}
-alias exit=_exit
-
-# nag to use C-l more, remove when no longer needed
-_clear() {
-    notify-send "clear command" "Use <b>Ctrl+l</b> instead of the clear command"
-}
-alias clear=_clear
-
 alias fetch="fastfetch" \
     statoctal="stat -c '%a'" \
     ll="ls -la" \
