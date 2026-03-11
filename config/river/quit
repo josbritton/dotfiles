@@ -1,31 +1,114 @@
 #!/bin/sh
 
-pgrep -x steam > /dev/null 2>&1 && \
-    steam steam://exit
+for cmd in printf bc parallel xargs pkill \
+    pgrep notify-send paste riverctl eww \
+    wlrctl sed
+do
+    command -v "$cmd" >/dev/null || notify-send "could not find: $cmd"
+done
 
-eww kill 2> /dev/null
+sumprocs() {
+    (
+        IFS=:
+        for cmd in "$@" $MONITOR_ONLY; do
+            # equivalent to ${cmd:0:15}
+            part="${cmd%"${cmd#???????????????}"}"
+            pgrep -xc "${part:-$cmd}"
+        done | paste -s -d+ - | bc
+    )
+}
 
-extra_time=0
-pgrep -x vesktop > /dev/null 2>&1 && \
-    extra_time=1
+donepcnt() {
+    bc -w <<EOF
+scale=3
+a=$1
+b=$2
 
-# kill x processess that do not exit on window close
-# waits for term before continuing
-terminate_bg vesktop \
-    bitwarden \
-    eww \
-    caffeine \
-    polkit-gnome-authentication-agent-1 \
+c = 0
+d = 0
+
+if (a > 0) {
+    c = 100 / a
+}
+
+if (a > b) {
+    d = a - b
+}
+
+c * d
+EOF
+}
+
+toint() {
+    xargs printf '%.0f\n'
+}
+
+noise() {
+    xargs -I {} notify-send -p ${ID:+-r "$ID"} -h int:value:{} 'Quitting'
+}
+
+## must handle process names longer than 15 characters
+### expects variable `$MONITOR_ONLY` to exist - colon delimited list of additional process names
+killthese() {
+    # progress loop (bounded)
+    initial_count="$(sumprocs "$@")"
+    i=0
+    while [ $i -le 200 ]; do
+        count="$(sumprocs "$@")"
+        ID="$(donepcnt "$initial_count" "$count" | toint | noise)"
+        sleep 1
+        i=$(( i + 1 ))
+    done &
+    notif=$!
+
+    massterm "$@"
+
+    # wait for monitored processes
+    parallel -d ':' --timeout 20 \
+        "echo '{}' | cut -c-15 | xargs pidwait -x" ::: "$MONITOR_ONLY"
+
+    echo 100 | noise
+    kill $notif 2>/dev/null
+
+    # only kill the bar UI right before killing the WM itself
+    eww kill 2> /dev/null
+
+    # kills any autostart programs launched via wm rc
+    riverctl exit
+}
+
+massterm() {
+    ## any custom termination scripts should be placed here
+
+    # check if steam is alive before sending a steam URI, as it would just wake it up
+    { pgrep -x steam >/dev/null 2>&1 && steam steam://exit; } &
+
+    # program does not behave with SIGTERM
+    pkill -INT -x vesktop &
+
+    ## BLOCKING
+
+    # close all wl toplevels
+    { wlrctl toplevel list | sed 's/^\([^:]*\):.*/\1/' | xargs -I{} wlrctl toplevel close app_id:{}; } \
+        && sleep 2  # try to avoid racing with toplevels that may still be closing
+
+    ## terminate background processes simultaneously
+    ## waits either for every process to be killed or timeout to elapse
+
+    # TERM
+    parallel --timeout 20 \
+        "echo '{}' | cut -c-15 | xargs pgrep -x | pkill -F - | pidwait -F -" ::: "$@"
+    # KILL
+    parallel --timeout 30 \
+        "echo '{}' | cut -c-15 | xargs pgrep -x | pkill -KILL -F - | pidwait -F -" ::: "$@"
+}
+
+MONITOR_ONLY="steam:vesktop"
+killthese bitwarden \
     firefox \
     obsidian \
     zotero \
-    thunderbird
-
-# wait for any desktop processes that are still running
-parallel --timeout 20 \
-    "pgrep -x '{}' > /dev/null 2>&1 || exit; pidwait '{}'" ::: steam
-
-sleep "$extra_time"
-
-# kills any autostart programs launched with bspwmrc
-riverctl exit
+    thunderbird \
+    supersonic-desktop \
+    footclient \
+    obs
