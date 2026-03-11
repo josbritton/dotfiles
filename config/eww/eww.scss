@@ -57,6 +57,13 @@ tooltip {
   box-shadow: unset;
 }
 
+.tooltip {
+  background-color: #1d1f21;
+  border: 1px solid #444444;
+  padding: 4px 3px;
+  font-size: 0.9em;
+}
+
 tooltip * {
   margin: unset;
   padding: unset;
@@ -120,4 +127,43 @@ box.systray {
 
 button.warning {
   color: #E0A458
+}
+
+.statusright label {
+  color: #eeeeec;
+}
+.statusright button:disabled {
+  color: inherit;
+}
+.statusright box {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+/* button.audioctl { */
+/*   padding-right: 0px; */
+/* } */
+
+.audioctl > box {
+  margin: 0px;
+}
+.audioctl label:not(:first-child) {
+  padding-left: 0.18em;
+}
+
+.activate-linux {
+  background: none;
+  opacity: 0.8;
+}
+
+.playerctl {
+  padding-left: 35px;
+}
+.player-Paused {
+  /* color: #ccccc6; */
+  /* color: #949595; */
+  color: #B2B3B2;
+  /* color: #595A5B; */
+  /* color: #949595; */
+  /* color: #D0D0CF; */
 }

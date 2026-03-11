@@ -1,0 +1,21 @@
+#!/bin/sh
+# LOG="$(mktemp -t pw-format.log.XXXX)"
+LOG=${LOG:-/dev/null}
+
+attach() {
+    id="$(wpctl inspect @DEFAULT_AUDIO_SINK@ | grep -m 1 -o '[0-9]*' 2>>"$LOG")"
+    [ -n "$id" ] || { echo "ERR: Could not get default sink Id" >&2; exit 1; }
+
+    echo "Default sink Id retrieved: $id" >&2
+
+    pw-dump -m | { jq -ceM --unbuffered ".[] | select(.id == $id)" || exit; } \
+        | jq -cM --unbuffered '.info.props // {}'
+}
+
+trap exit INT
+trap exit TERM
+
+while ! ( attach ) 2>> "$LOG"; do
+    sleep 2
+    echo "Re-attaching." >> "$LOG"
+done

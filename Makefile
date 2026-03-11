@@ -327,6 +327,15 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/wakeaudio)" \
 		"$(BIN_HOME)/wakeaudio" \
 		"wakeaudio"
+	./register "$$(realpath bin/pw-props)" \
+		"$(BIN_HOME)/pw-props" \
+		"pipewire"
+	./register "$$(realpath bin/pw-format)" \
+		"$(BIN_HOME)/pw-format" \
+		"pipewire"
+	./register "$$(realpath bin/pw-vol)" \
+		"$(BIN_HOME)/pw-vol" \
+		"pipewire"
 
 	./register "$$(realpath home/.steam/steam/steam_dev.cfg)" \
 		"$(HOME)/.steam/steam/steam_dev.cfg" \

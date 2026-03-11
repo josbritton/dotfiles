@@ -1,14 +1,210 @@
-(defpoll longdate :interval "10s"
-    "date '+%a, %d %b %Y'")
-
-(deflisten time "clock")
-
-(defpoll date :interval "10s"
-    "date '+%Y-%m-%d'")
-
 (include "config.yuck")
-(include "bar/river.yuck")
-;;(include "bar/bspwm.yuck")
+(include "activate-linux.yuck")
 
-(defvar config-version
-    1.0)
+(defwidget bar [monitor tags clipcmd focused-monitor]
+(centerbox :class "bar"
+        :orientation "h"
+    (statusleft :tags tags
+            :focused-monitor focused-monitor
+            :monitor monitor)
+    (windowtitle :tags tags
+            :focused-monitor focused-monitor
+            :monitor monitor
+            :title { windowtitle?.[0]?.title }
+            :char-limit window-title-len-max-chr)
+    (statusright :clipcmd clipcmd :monitor monitor)))
+
+(defwidget statusleft [monitor tags focused-monitor]
+(box :class "statusleft"
+        :orientation "h"
+        :space-evenly false
+        :halign "start"
+    (workspaces :tags tags
+            :focused-monitor focused-monitor
+            :tagfocus { jq(river-tagfocus, '.[] | select(.output == \"${monitor}\")') }
+            :toplevels { jq(river-toplevels, 'map(select(.output == \"${monitor}\"))') }
+            :monitor monitor)
+    (playerctl :hasplayback { player-meta-artist != "" && player-meta-title != "" })))
+
+(defwidget statusright [clipcmd monitor]
+(box :class "statusright"
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
+    (systray :class "systray"
+             :spacing 8
+             :orientation "h"
+             :space-evenly true
+             :prepend-new true)
+    (netctl :mode netctl-display-mode)
+    (audioctl)
+    ;; (volctl)
+    (datetime :monitor monitor
+            :clipcmd clipcmd
+            :newln copy-date-newline)))
+
+(defwidget playerctl [hasplayback]
+(tooltip
+(label :justify "center"
+    :unindent true
+    :markup `<span>${player-meta-title} - ${player-meta-artist}${ player-status == 'Paused' ? ' (paused)' : '' }
+vol: ${ player-volume != '' ? round(player-volume, 2) : '' } [click to show]</span>`)
+(box :class "playerctl"
+        :space-evenly false
+    (button :class "player-vol"
+            :visible { player-volume != "" && playerctl-show-volume }
+            :onclick "playerctl -p Supersonic volume 1.0"
+            "vol: ${ player-volume != "" ? round(player-volume, 2) : "" }")
+    (button :class "player-meta player-${player-status}"
+            ;; :onclick "playerctl -p Supersonic play-pause"
+            :onclick "wlrctl toplevel close app_id:Supersonic || supersonic-desktop"
+            (box :space-evenly false
+                (label :visible { playerctl-show-status && (hasplayback || playerctl-show-stopped-status) }
+                    :text "${player-status}${ hasplayback ? ": " : "" }")
+                (label :limit-width 30
+                    :visible hasplayback
+;;                     :tooltip "${player-meta-title} - ${player-meta-artist}
+;; ${player-status}, vol: ${ player-volume != '' ? round(player-volume, 2) : '' } [click to show]"
+                    :text "${player-meta-title} - ${player-meta-artist}"))))))
+
+(defwidget netctl [mode]
+(netctlbtn :mode mode
+            :adapter { jq(EWW_NET,
+                'del(.lo,.docker0) | (keys[] | select(test("^wg[a-zA-Z0-9_=+.-]{1,13}$"))) // keys[0] // ""',
+                'r') }
+            :addr { (mode == 2 || mode == 3) ? ip-address : `{}` }
+            :onclick { ! netctl-disable-button }))
+
+(defwidget netctlbtn [mode adapter addr onclick]
+(button :class "netctl"
+        :visible { mode != 0 }
+        :onclick { onclick ? "${EWW_CMD} update \
+            netctl-display-mode=${ mode < 3 ? (mode + 1) : 1 }" : "" }
+        :active onclick
+        "${
+            (mode == 1 || mode == 3) ? adapter : ''
+        }${
+            mode == 3 ? ': ' : ''
+        }${
+            jq(addr, '.[] | select(.ifname == \"${adapter}\") | .addr_info.[0].local', 'r')
+        }"))
+
+(defwidget audioctl []
+(button :class "audioctl"
+        :tooltip { "snk: ${volume}" }
+        :visible { sinkformat != `{}` }
+        :onclick "wakeaudio"
+        ;; :onclick "wpctl set-mute @DEFAULT_SINK@ 0; \
+        ;;     wpctl set-mute @DEFAULT_SOURCE@ 0; \
+        ;;     wpctl set-volume @DEFAULT_SINK@ 1.0; \
+        ;;     wpctl set-volume @DEFAULT_SOURCE@ 1.0"
+    (box :space-evenly false
+        ;; rate will always be S32LE because that's the native graph format...
+        ;; you could inspect the streams for a music stream and then find it's format though
+        ;; (label :text { sinkformat?.format ?: "" })
+        (label :text { sinkformat?.rate ?: "" }))))
+
+;; (defwidget volctl []
+;; (box :class "volctl"
+;;         :visible { volume != "" }
+;;     (button :onclick "wpctl set-mute @DEFAULT_SINK@ toggle"
+;;             ;; "snk: ${volume}"
+;;             { volume }
+;;             )))
+
+(defwidget datetime [monitor clipcmd newln]
+(box :class "datetime"
+        :orientation "h"
+        :space-evenly false
+        :halign "end"
+    (button :class "time"
+            :active false
+            { formattime(EWW_TIME, "%H:%M") })
+    (button :class "date"
+            :tooltip { formattime(EWW_TIME, "%a, %d %b %Y") }
+            :onclick "${EWW_CMD} update eggval=${eggval >= 6 ? 0 : eggval + 1}"
+            :onrightclick "{ printf '${ formattime(EWW_TIME, "%Y-%m-%d") }${
+                newln ? "\\n" : "" }' | ${clipcmd}; } && notify-send 'Copied to clipboard.'"
+            { formattime(EWW_TIME, "%Y-%m-%d") })))
+
+(defwidget workspace [focused occupied active tag onclick]
+(button
+    :onclick onclick
+    :class "${ focused ? "focused" : "unfocused" } ${
+            occupied ? "occupied" : "unoccupied" } ${
+            active ? "active" : "inactive" }"
+    tag))
+
+(defwidget workspaces [monitor tags focused-monitor tagfocus toplevels]
+(box :class "workspaces"
+        :orientation "h"
+        :space-evenly true
+        :halign "start"
+    (for tag in tags
+        (workspace
+            :tag tag
+            :focused { tagfocus?.focused_id == (tag - tags[0]) + 1 }
+            :occupied { jq(toplevels, '.[] | select(.id == ${(tag - tags[0]) + 1}) | .occupied') ?: false }
+            :active { focused-monitor ? tagfocus?.focused_id == (tag - tags[0]) + 1 : false }
+            :onclick "riverctl focus-output \"${monitor}\" \
+                && riverctl set-focused-tags \"\$((1 << (${tag - tags[0]})))\""))))
+
+(defwidget windowtitle [tags monitor char-limit title focused-monitor]
+(label :class "windowtitle"
+        :text title
+        :visible { focused-monitor && ( ! matches(title, ' · Supersonic$') ) }
+        :limit-width { char-limit == -1 ? 2147483647 : char-limit } ;; i32 max
+        :show-truncated true
+        :yalign 0.5
+        :tooltip title))
+
+(deflisten windowtitle :initial `[]`
+    "river-bedload -minified -watch title")
+
+(deflisten river-outputs :initial `{}`
+    "river-bedload -minified -watch outputs")
+
+(deflisten river-toplevels :initial `{}`
+    "river-bedload -minified -watch active")
+
+(deflisten river-tagfocus :initial `{}`
+    "river-bedload -minified -watch focused")
+
+(deflisten sinkformat :initial `{}`
+    "pw-format")
+
+(deflisten volume :initial ""
+            "pw-vol")
+
+(deflisten player-volume :initial ""
+            "playerctl -p Supersonic -Fs volume")
+
+(deflisten player-meta-artist :initial ""
+            "playerctl -p Supersonic -Fs metadata artist")
+
+(deflisten player-meta-title :initial ""
+            "playerctl -p Supersonic -Fs metadata title")
+            ;; "playerctl -p Supersonic -Fs -f '{{trunc(title, 20)}}' metadata")
+
+(deflisten player-status :initial ""
+            "playerctl -p Supersonic -Fs status")
+
+(defpoll ip-address :interval "2s"
+                    :initial `{}`
+                    :run-while { netctl-display-mode == 2 || netctl-display-mode == 3 }
+    "ip -j -4 a")
+
+(defvar eggval 0)
+
+(defwindow waybar [monitor tags]
+    :monitor monitor
+    :stacking "bg"
+    :geometry (geometry :width "100%"
+        :height "30px"
+        :anchor "top center")
+    :exclusive true
+    :focusable "none"
+(bar :tags tags
+        :focused-monitor { (jq(river-outputs, '.[] | select(.name == \"${monitor}\")'))?.focused ?: false }
+        :monitor monitor
+        :clipcmd "wl-copy"))

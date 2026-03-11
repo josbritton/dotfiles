@@ -1,14 +1,17 @@
-;; Credit Nycta 2024
+;; Modified from code by Nycta (2024)
 (defwidget activate-linux []
   (box
+    :class "activate-linux"
     :orientation "v"
     :halign "start"
     :valign "start"
+    :visible { enable-activate-linux == 2 || (eggval == 6 && enable-activate-linux == 1) }
     (label :xalign 0 :markup "<span font_size=\"large\">Activate Linux</span>")
     (label :xalign 0 :text "Go to Settings to activate Linux")))
 
-(defwindow activate-linux
-  :monitor 0
-  :stacking "fg"
+(defwindow activate-linux [monitor]
+  :monitor monitor
+  :focusable "none"
+  :stacking "overlay"
   :geometry (geometry :x "8px" :y "32px" :width "250px" :anchor "bottom right")
   (activate-linux))
