@@ -7,7 +7,7 @@
 INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  neovim steam river git zathura xdg-portals tealdeer pacman \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
-		  syncgs firefox yamllint bash ffmpeg ssh terminate_bg kitty \
+		  syncgs firefox yamllint bash ssh terminate_bg kitty \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
 		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4
 
@@ -294,12 +294,6 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/syncgs)" \
 		"$(BIN_HOME)/syncgs" \
 		"syncgs"
-	./register "$$(realpath bin/ffprobe_pager)" \
-		"$(BIN_HOME)/ffprobe_pager" \
-		"ffmpeg"
-	./register "$$(realpath bin/open_ffprobe)" \
-		"$(BIN_HOME)/open_ffprobe" \
-		"ffmpeg"
 	./register "$$(realpath bin/terminate_bg)" \
 		"$(BIN_HOME)/terminate_bg" \
 		"terminate_bg"
