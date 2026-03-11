@@ -1,27 +1,38 @@
 #!/bin/sh
-set -e
+arg="$*"
 
-which tmux > /dev/null 2>&1 || \
-    (echo tmux not found; exit 1)
+filter() {
+    which fzf > /dev/null 2>&1 \
+        || (echo fzf not found; exit 1)
+    # --bind 'enter:transform:echo print("$FZF_QUERY")+accept' \
 
-selected=$1
-if [ $# -ne 1 ]; then
-    which fzf > /dev/null 2>&1 || \
-        (echo fzf not found; exit 1)
+    fzf --exact --tmux \
+        --print-query \
+        --bind "start:reload:findproj \"$arg\" || true" \
+        --info-command '{ [ -z "$FZF_QUERY" ] || [ "$FZF_MATCH_COUNT" -gt 0 ]; } &&
+        echo || echo "New Project: ~/Sync/$FZF_QUERY"'
+}
 
-    # ex: additional_dirs="/path/to/dir\n/path/to/dir2"
-    additional_dirs="$HOME/Sync/dotfiles/config/nvim\n$HOME/Sync/zed/crates/gpui"
+which tmux > /dev/null 2>&1 \
+    || (echo tmux not found; exit 1)
 
-    # use fd when possible, fallback to find
-    which fd > /dev/null 2>&1 && \
-        out="$(fd -L . ~/Sync ~/Sync/alt --exact-depth 1 -E alt/ -t d -x echo)" || \
-        out="$(find -L ~/Sync ~/Sync/alt -mindepth 1 -maxdepth 1 -type d -not -name ".*" -not -name alt)"
+if ! selected="$(filter)"; then
+    selected="$(printf '%s\n' "$selected" | tail -n 1)"
 
-    selected="$( (printf '%s\n%b' "$out" "$additional_dirs") | fzf --tmux)"
+    if [ -n "$selected" ]; then
+        selected="$HOME/Sync/$selected"
+        mkdir -p "$selected"
+    fi
+
+    # undefined
+else
+    selected="$(printf '%s\n' "$selected" | tail -n +2)"
 fi
 
 # no selection, nothing to do
 [ -z "$selected" ] && exit
+
+selected="$(printf '%s\n' "$selected" | sed "s|^~|$HOME|")"
 
 selected_name=$(basename "$selected" | tr . _)
 
@@ -45,12 +56,12 @@ fi
 #          https://superuser.com/questions/1174750/tmux-has-session-search-is-prefix-matching
 
 # tmux session already exists
-tmux has-session -t="$selected_name" > /dev/null 2>&1 || \
-    tmux new-session -d -s "$selected_name" -c "$selected"
+tmux has-session -t="$selected_name" > /dev/null 2>&1 \
+    || tmux new-session -d -s "$selected_name" -c "$selected"
 
 # not in tmux session and tmux is running
-[ -z "$TMUX" ] && \
-    (tmux attach-session -t="$selected_name"; exit)
+[ -z "$TMUX" ] \
+    && (tmux attach-session -t="$selected_name"; exit)
 
 # inside tmux session
 tmux switch-client -t="$selected_name"

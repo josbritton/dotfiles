@@ -255,6 +255,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/switchproj)" \
 		"$(BIN_HOME)/switchproj" \
 		"tmux"
+	./register "$$(realpath bin/findproj)" \
+		"$(BIN_HOME)/findproj" \
+		"tmux"
 	./register "$$(realpath bin/tmuxopensesh)" \
 		"$(BIN_HOME)/tmuxopensesh" \
 		"tmux"

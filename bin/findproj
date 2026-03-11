@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# hardcoded search paths:
+#   ~/Sync
+#   ~/Sync/alt
+
+# prefer fd, fallback to find
+if which fd > /dev/null 2>&1; then
+    # multi-threaded is non-reproducible
+    out="$(fd -L . ~/Sync ~/Sync/alt --threads 1 --exact-depth 1 -E alt/ -t d -x echo)"
+else
+    out="$(find -L ~/Sync ~/Sync/alt -mindepth 1 -maxdepth 1 -type d -not -name ".*" -not -name alt)"
+fi
+
+printf '%s\n%b' "$out" "$*" | sed "s|^$HOME|~|"

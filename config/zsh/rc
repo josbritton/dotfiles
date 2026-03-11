@@ -107,7 +107,7 @@ open_thunar_cwd() {
 
 open_project_session() {
     restore_stdio
-    switchproj
+    switchproj "$HOME/Sync/dotfiles/config/nvim\n$HOME/Sync/zed/crates/gpui"
     zle reset-prompt
 }
 
