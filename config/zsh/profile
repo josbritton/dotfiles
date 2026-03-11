@@ -1,5 +1,6 @@
 export FZF_DEFAULT_OPTS="--bind='ctrl-h:backward-kill-word'"
 export FZF_DEFAULT_COMMAND="git ls-files --cached --others --exclude-standard | fd --type f --type l --follow"
+export FZF_CTRL_R_OPTS="--exact"  # exact history queries
 export EDITOR=nvim
 export PATH="$PATH:$HOME/.local/bin"
 [ -z $GOPATH ] || export PATH="$PATH:$GOPATH/bin"
