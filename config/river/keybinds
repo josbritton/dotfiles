@@ -12,7 +12,7 @@ riverctl map normal Super B spawn firefox
 riverctl map normal None XF86HomePage spawn firefox
 riverctl map normal None XF86WWW spawn firefox
 riverctl map normal Super Return spawn footclient
-riverctl map normal Super Tab spawn "tofi-run | xargs riverctl spawn"
+riverctl map normal Super Tab spawn 'tofi-run --output="$(river-bedload -minified -print outputs | jq -rcM --unbuffered ".[] | select(.focused == true) | .name")" | xargs riverctl spawn'
 riverctl map normal Super E spawn Thunar
 
 ## screenshots
