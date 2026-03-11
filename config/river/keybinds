@@ -64,6 +64,9 @@ riverctl map passthrough Super F11 enter-mode normal
 
 riverctl map normal Super Q close
 
+# riverctl map normal Super S spawn 'wlrctl toplevel close app_id:Supersonic || supersonic-desktop'  # toggle (show/hide)
+riverctl map normal Super S spawn 'wlrctl toplevel close app_id:Supersonic; supersonic-desktop'  # show
+
 ## media keys
 MEDIAPLAYER="${MEDIAPLAYER:-Supersonic}"
 for mode in normal locked; do
