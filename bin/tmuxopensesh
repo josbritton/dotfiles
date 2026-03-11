@@ -20,7 +20,7 @@ if [[ -z $s ]]; then
 		exit 1
 fi
 
-local selected="$(echo "$s" | sed '/^$/d' | fzf --tmux)"
+local selected="$(echo "$s" | sed '/^$/d' | fzf --tmux -e)"
 [[ -z $selected ]] && return
 if [[ -z $TMUX ]]; then
 		tmux attach-session -t="$selected"
