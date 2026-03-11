@@ -48,8 +48,8 @@ riverctl map-pointer normal Super BTN_RIGHT resize-view
 # Super + Middle Mouse Button to toggle float
 riverctl map-pointer normal Super BTN_MIDDLE toggle-float
 
-# # Super+Space to toggle float
-# riverctl map normal Super Space toggle-float
+# Super+Space to toggle float
+riverctl map normal Super Space toggle-float
 
 riverctl map gamemode Control+Alt G spawn "$XDG_CONFIG_HOME/river/scripts/ungamemode"
 riverctl map normal Control+Alt G spawn "$XDG_CONFIG_HOME/river/scripts/gamemode DP-3"
