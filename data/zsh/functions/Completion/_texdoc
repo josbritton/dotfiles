@@ -1,0 +1,11 @@
+#compdef texdoc
+#
+# This is file '_texdoc' a zsh completion script for texdoc.
+#
+# This script is public domain.
+#
+
+(( $+functions[__texdoc] )) || eval "$(texdoc \
+  --print-completion zsh)" && __texdoc
+
+# vim: ft=zsh:
