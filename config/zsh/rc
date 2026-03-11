@@ -101,6 +101,10 @@ open_neovim_cwd() {
     nvim .
 }
 
+open_thunar_cwd() {
+    riverctl spawn "thunar "$PWD""
+}
+
 open_project_session() {
     restore_stdio
     switchproj
@@ -185,6 +189,7 @@ zle -N clear_terminal_all
 zle -N open_project_session
 zle -N tmux_switch_session
 zle -N open_neovim_cwd
+zle -N open_thunar_cwd
 
 # use vi keys in tab complete menu
 bindkey -M menuselect "h" vi-backward-char
@@ -207,6 +212,8 @@ bindkey "^H" backward-kill-word
 bindkey "^[[H" beginning-of-line
 bindkey "^[[F" end-of-line
 bindkey "^[[3~" delete-char
+
+bindkey "^[OQ" open_thunar_cwd
 
 local bold_prompt
 typeset -A promptcolors
