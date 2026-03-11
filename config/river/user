@@ -1,16 +1,59 @@
 #!/bin/sh
-## edit this file according to your machine's values
 
 # display configuration
-wlr-randr --output DP-3 --mode 2560x1440@165Hz --pos 0,0
-wlr-randr --output DP-2 --mode 2560x1440@165Hz --pos 2560,0
-xrandr --output DP-3 --primary  # needed for clicks to register for some programs running under XWayland
-river-mon DP-3 1 4
-river-mon DP-2 5 8
+#   see: ~/.config/kanshi/config
+
+if [ $# -gt 9 ]; then
+    echo "ERR: number of outputs cannot exceed 9" >&2
+    exit 1
+fi
+
+if [ $# -eq 0 ]; then
+    echo "ERR: must specify at least 1 output" >&2
+    exit 1
+fi
+
+conf() {
+    # shellcheck disable=SC2046
+    IFS= set -- $(cat)
+
+    n=$(echo "$# / 2" | bc)
+    step=$(echo "9 / $n" | bc)
+    while [ $# -ge 2 ]; do
+        i=$1
+        shift
+        name=$1
+        shift
+        hi=$(echo "$i * $step" | bc)
+        lo=$(echo "$hi - ($step - 1)" | bc)
+
+
+        river-mon "$name" "$lo" "$hi"
+    done
+}
+
+i=0
+conf <<EOF
+$(for arg in "$@"; do
+    i=$((i + 1))
+    for output in ${WELLKNOWN_OUTPUTS:-"DP-1"}; do
+        if [ "$arg" != "$output" ]; then
+            continue
+        fi
+        echo "$i $arg"
+        continue 2
+    done
+    echo "arg: $arg is not well-known - skipping" >&2
+done)
+EOF
 
 # spawn Steam games on primary monitor
-riverctl rule-add -app-id "steam_app_*" output DP-3
+riverctl rule-add -app-id "steam_app_*" output "$1"
+
+# primary must be set for clicks to register for some XWayland programs
+xrandr --output "$1" --primary
 
 # audio device configuration
 pactl set-default-source alsa_input.usb-Soundcraft_Notepad-5-00.analog-stereo
-pactl set-default-sink alsa_output.usb-DIDI_AUDIO_TC100COA-01.analog-stereo
+pactl set-default-sink alsa_output.usb-SMSL_SMSL_USB_AUDIO-00.pro-output-0
+pw-metadata -n settings 0 clock.allowed-rates "[ 44100 48000 88200 96000 176400 192000 ]" ''

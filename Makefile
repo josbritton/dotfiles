@@ -7,7 +7,7 @@
 INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  neovim steam river git zathura xdg-portals tealdeer pacman \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
-		  syncgs firefox yamllint bash ssh terminate_bg kitty \
+		  syncgs firefox yamllint bash ssh terminate_bg kitty kanshi \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
 		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4
 
@@ -235,6 +235,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/gtk-4.0/settings.ini)" \
 		"$(XDG_CONFIG_HOME)/gtk-4.0/settings.ini" \
 		"gtk4"
+	./register "$$(realpath config/kanshi)" \
+		"$(XDG_CONFIG_HOME)/kanshi" \
+		"kanshi"
 
 	./register "$$(realpath data/zsh/functions/Completion)" \
 		"$(XDG_DATA_HOME)/zsh/functions/Completion" \

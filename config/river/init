@@ -54,4 +54,7 @@ foot -C || echo "error: foot config check failed" >&2
 foot -s &
 eww daemon
 
+timestamp="$(date +%F-%R)"
+kanshi > /tmp/kanshi."${timestamp}".log 2>&1 &
+
 swaybg -i ~/Pictures/Wallpapers/duo_light.jpg -m fill &
