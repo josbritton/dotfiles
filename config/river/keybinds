@@ -22,8 +22,8 @@ riverctl map normal None Print spawn 'mkdir -p "$(xdg-user-dir PICTURES)/Screens
 # selection (no freezing frame!)
 riverctl map normal Shift Print spawn 'mkdir -p "$(xdg-user-dir PICTURES)/Screenshots"; grim -g "$(slurp)" - | tee -p "$(xdg-user-dir PICTURES)/Screenshots/$(date +%Y-%m-%d_%s.png)" | wl-copy && notify-send "Screenshot saved"'
 
-# lock the screen (spawn waylock)
-riverctl map normal Control+Alt L spawn waylock
+# lock the screen
+riverctl map normal Control+Alt L spawn 'sudo -K; waylock'
 
 ## Vim key split controls
 riverctl map normal Super H focus-view left
