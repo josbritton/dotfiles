@@ -13,8 +13,8 @@
 [pager]
 	branch = false
 [url "git@github-JosBritton:JosBritton"]
-    insteadOf = git@github.com:JosBritton
-[includeIf "hasconfig:remote.*.url:git@github.com:JosBritton/**"]
+    insteadOf = git@github.com:josbritton
+[includeIf "hasconfig:remote.*.url:git@github.com:josbritton/**"]
 	path = ~/.config/git/user/JosBritton
 [includeIf "hasconfig:remote.*.url:git@git.swifthomelab.net:josbritton/**"]
 	path = ~/.config/git/user/JosBritton
