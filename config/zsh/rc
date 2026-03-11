@@ -31,13 +31,13 @@
     || zcompile -R -- "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/you-should-use.plugin.zsh.zwc" \
     /usr/share/zsh/plugins/zsh-you-should-use/you-should-use.plugin.zsh
 
-[[ ! -e "${ZDOTDIR:-$HOME}/vi.zsh" || "${ZDOTDIR:-$HOME}/vi.zsh.zwc" -nt "${ZDOTDIR:-$HOME}/vi.zsh" ]] \
-    || zcompile -R -- "${ZDOTDIR:-$HOME}/vi.zsh.zwc" "${ZDOTDIR:-$HOME}/vi.zsh"
-source "${ZDOTDIR:-$HOME}/vi.zsh"
+[[ ! -e "$ZDOTDIR/zsh/vi.zsh" || "$ZDOTDIR/zsh/vi.zsh.zwc" -nt "$ZDOTDIR/zsh/vi.zsh" ]] \
+    || zcompile -R -- "$ZDOTDIR/zsh/vi.zsh.zwc" "$ZDOTDIR/zsh/vi.zsh"
+source "$ZDOTDIR/zsh/vi.zsh"
 
-# [[ ! -e "${ZDOTDIR:-$HOME}/tmux.zsh" || "${ZDOTDIR:-$HOME}/tmux.zsh.zwc" -nt "${ZDOTDIR:-$HOME}/tmux.zsh" ]] \
-#     || zcompile -R -- "${ZDOTDIR:-$HOME}/tmux.zsh.zwc" "${ZDOTDIR:-$HOME}/tmux.zsh"
-# source "${ZDOTDIR:-$HOME}/tmux.zsh"
+# [[ ! -e "$ZDOTDIR/zsh/tmux.zsh" || "$ZDOTDIR/zsh/tmux.zsh.zwc" -nt "$ZDOTDIR/zsh/tmux.zsh" ]] \
+#     || zcompile -R -- "$ZDOTDIR/zsh/tmux.zsh.zwc" "$ZDOTDIR/zsh/tmux.zsh"
+# source "$ZDOTDIR/zsh/tmux.zsh"
 
 # disable flow control keybinds which freeze/unfreeze terminal: ctrl-s (XOFF) and ctrl-q (XON)
 stty -ixon

@@ -130,6 +130,15 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/zsh)" \
 		"$(XDG_CONFIG_HOME)/zsh" \
 		"zsh"
+	./register "$$(realpath config/.zshrc)" \
+		"$(XDG_CONFIG_HOME)/.zshrc" \
+		"zsh"
+	./register "$$(realpath config/.zprofile)" \
+		"$(XDG_CONFIG_HOME)/.zprofile" \
+		"zsh"
+	./register "$$(realpath config/.zshenv)" \
+		"$(XDG_CONFIG_HOME)/.zshenv" \
+		"zsh"
 	./register "$$(realpath config/X11)" \
 		"$(XDG_CONFIG_HOME)/X11" \
 		"xinit"
@@ -313,9 +322,6 @@ register: $(REGISTER_RUN_DIR)
 		"$(BIN_HOME)/wakeaudio" \
 		"wakeaudio"
 
-	./register "$$(realpath home/.zshenv)" \
-		"$(HOME)/.zshenv" \
-		"zsh"
 	./register "$$(realpath home/.steam/steam/steam_dev.cfg)" \
 		"$(HOME)/.steam/steam/steam_dev.cfg" \
 		"steam"
