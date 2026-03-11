@@ -9,7 +9,7 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ssh terminate_bg kitty kanshi \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
-		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4
+		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4 wayvnc
 
 define INSTALL_TARGET
 .PHONY: all
@@ -235,6 +235,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath config/gtk-4.0/settings.ini)" \
 		"$(XDG_CONFIG_HOME)/gtk-4.0/settings.ini" \
 		"gtk4"
+	./register "$$(realpath config/wayvnc)" \
+		"$(XDG_CONFIG_HOME)/wayvnc" \
+		"wayvnc"
 	./register "$$(realpath config/kanshi)" \
 		"$(XDG_CONFIG_HOME)/kanshi" \
 		"kanshi"
