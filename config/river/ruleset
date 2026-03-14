@@ -26,3 +26,5 @@ riverctl rule-add -app-id xdg-desktop-portal-gtk -title "Select cover image" flo
 riverctl rule-add -app-id thunar float
 riverctl rule-add -app-id thunar -title "* - Thunar" no-float  # main window
 riverctl rule-add -app-id "Peak Meter" float  # main window
+
+riverctl rule-add -app-id com.obsproject.Studio -title Stats float
