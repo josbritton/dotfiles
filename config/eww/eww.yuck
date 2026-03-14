@@ -49,7 +49,9 @@
     :unindent true
     :markup `<span>${player-meta-title} - ${player-meta-artist}${ player-status == 'Paused' ? ' (paused)' : '' }
 vol: ${ player-volume != '' ? round(player-volume, 2) : '' } [click to show]</span>`)
-(box :class "playerctl"
+(eventbox
+    :onscroll "scroll-audio {}"
+            (box :class "playerctl"
         :space-evenly false
     (button :class "player-vol"
             :visible { player-volume != "" && playerctl-show-volume }
@@ -65,7 +67,7 @@ vol: ${ player-volume != '' ? round(player-volume, 2) : '' } [click to show]</sp
                     :visible hasplayback
 ;;                     :tooltip "${player-meta-title} - ${player-meta-artist}
 ;; ${player-status}, vol: ${ player-volume != '' ? round(player-volume, 2) : '' } [click to show]"
-                    :text "${player-meta-title} - ${player-meta-artist}"))))))
+                    :text "${player-meta-title} - ${player-meta-artist}")))))))
 
 (defwidget netctl [mode]
 (netctlbtn :mode mode

@@ -1,0 +1,13 @@
+#!/bin/sh
+STEP="${STEP:-0.05}"
+case "$1" in
+    up)
+        playerctl volume "$STEP+"
+        ;;
+    down)
+        playerctl volume "$STEP-"
+        ;;
+    *)
+        exit 1
+        ;;
+esac

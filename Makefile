@@ -336,6 +336,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/pw-vol)" \
 		"$(BIN_HOME)/pw-vol" \
 		"pipewire"
+	./register "$$(realpath bin/scroll-audio)" \
+		"$(BIN_HOME)/scroll-audio" \
+		"eww"
 
 	./register "$$(realpath home/.steam/steam/steam_dev.cfg)" \
 		"$(HOME)/.steam/steam/steam_dev.cfg" \
