@@ -7,6 +7,7 @@ riverctl map normal Control+Alt Delete spawn \
 
 "${XDG_CONFIG_HOME}/river/keybinds" &
 "${XDG_CONFIG_HOME}/river/ruleset" &
+"${XDG_CONFIG_HOME}/river/userconf" &
 
 riverctl input "pointer-*" accel-profile none
 

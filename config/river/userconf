@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# audio device configuration
+pactl set-default-source alsa_input.usb-Soundcraft_Notepad-5-00.analog-stereo
+pactl set-default-sink alsa_output.usb-SMSL_SMSL_USB_AUDIO-00.pro-output-0
+pw-metadata -n settings 0 clock.allowed-rates "[ 44100 48000 88200 96000 176400 192000 ]" ''
