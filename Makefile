@@ -348,6 +348,9 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/copy-path)" \
 		"$(BIN_HOME)/copy-path" \
 		"thunar"
+	./register "$$(realpath bin/showplayer)" \
+		"$(BIN_HOME)/showplayer" \
+		"river"
 
 	./register "$$(realpath home/.steam/steam/steam_dev.cfg)" \
 		"$(HOME)/.steam/steam/steam_dev.cfg" \

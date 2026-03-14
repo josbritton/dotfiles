@@ -1,0 +1,17 @@
+#!/bin/sh
+
+if [ -n "$TOGGLE" ]; then
+    wlrctl toplevel close app_id:Supersonic || riverctl spawn supersonic-desktop
+    exit
+else
+    # lswt -c aA \
+    #     --force-protocol zwlr-foreign-toplevel-management-unstable-v1 \
+    #     | grep -q Supersonic,true \
+    #     || wlrctl toplevel close app_id:Supersonic
+
+    wlrctl toplevel list app_id:Supersonic state:active \
+        | grep -q . \
+        || wlrctl toplevel close app_id:Supersonic
+    riverctl spawn supersonic-desktop
+fi
+
