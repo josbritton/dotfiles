@@ -1,0 +1,28 @@
+#!/bin/sh
+
+f="$1"
+shift
+
+# coalesce first valid path from input
+for arg in "$@"; do
+    if [ -f "$f" ]; then
+        f="$(dirname -- "$f")"
+        break
+    fi
+
+    if [ -d "$f" ]; then
+        break
+    fi
+
+    f="$f $arg"
+done
+
+if [ ! -d "$f" ]; then
+    f="$(dirname -- "$f")"
+fi
+
+set -- "$f"
+
+exo-open \
+    --launch=TerminalEmulator \
+    --working-directory "$@"

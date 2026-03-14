@@ -9,7 +9,7 @@ INSTALL_ALIASES = tmux fontconfig ccache foot thunderbird zsh pipewire \
 		  xdg-dirs npm fastfetch fd rfv eww convert_hex_xterm red_oxide \
 		  syncgs firefox yamllint bash ssh terminate_bg kitty kanshi \
 		  diff_pager readline imv tofi wlr-screenshot mangohud gamemode \
-		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4 wayvnc
+		  dust gsr syncgsr gb wakeaudio gtk2 gtk3 gtk4 wayvnc thunar
 
 define INSTALL_TARGET
 .PHONY: all
@@ -339,6 +339,15 @@ register: $(REGISTER_RUN_DIR)
 	./register "$$(realpath bin/scroll-audio)" \
 		"$(BIN_HOME)/scroll-audio" \
 		"eww"
+	./register "$$(realpath bin/open-term-dir)" \
+		"$(BIN_HOME)/open-term-dir" \
+		"thunar"
+	./register "$$(realpath bin/inspect-media)" \
+		"$(BIN_HOME)/inspect-media" \
+		"thunar"
+	./register "$$(realpath bin/copy-path)" \
+		"$(BIN_HOME)/copy-path" \
+		"thunar"
 
 	./register "$$(realpath home/.steam/steam/steam_dev.cfg)" \
 		"$(HOME)/.steam/steam/steam_dev.cfg" \

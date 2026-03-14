@@ -1,0 +1,6 @@
+#!/bin/sh
+xargs -0 -I{} footclient -H -- sh -xc "{}" <<EOF
+$(for arg in "$@"; do
+    printf -- 'ffprobe -hide_banner -i "%s";\0' "$arg"
+done)
+EOF
