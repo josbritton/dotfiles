@@ -155,7 +155,6 @@ source "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/dircolors.zsh"
 
 # overrides
 alias ls="LC_ALL=C ls -hN1F --color=auto --group-directories-first" \
-    journalctl="journalctl --all --full --reverse" \
     grep="grep --color=auto" \
     fgrep="fgrep --color=auto" \
     egrep="egrep --color=auto" \
